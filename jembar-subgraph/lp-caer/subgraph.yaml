@@ -1,0 +1,53 @@
+specVersion: 1.2.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: LendingPool
+    network: arbitrum-sepolia
+    source:
+      address: "0xd239368762B62e2F5F82BEe15C991B7F246F4B4D"
+      abi: LendingPool
+      startBlock: 136443990
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - BorrowByPosition
+        - CreatePosition
+        - Flashloan
+        - RepayByPosition
+        - RepayWithCollateralByPosition
+        - Supply
+        - SupplyCollateralByPosition
+        - SwapByPosition
+        - Withdraw
+        - WithdrawCollateral
+      abis:
+        - name: LendingPool
+          file: ./abis/LendingPool.json
+      eventHandlers:
+        - event: BorrowByPosition(address,uint256,uint256,bool)
+          handler: handleBorrowByPosition
+        - event: CreatePosition(address,address)
+          handler: handleCreatePosition
+        - event: Flashloan(address,address,uint256)
+          handler: handleFlashloan
+        - event: RepayByPosition(address,uint256,uint256)
+          handler: handleRepayByPosition
+        - event: RepayWithCollateralByPosition(address,uint256,uint256)
+          handler: handleRepayWithCollateralByPosition
+        - event: Supply(address,uint256,uint256)
+          handler: handleSupply
+        - event: SupplyCollateralByPosition(address,uint256)
+          handler: handleSupplyCollateralByPosition
+        - event: SwapByPosition(address,address,address,uint256,uint256)
+          handler: handleSwapByPosition
+        - event: Withdraw(address,uint256,uint256)
+          handler: handleWithdraw
+        - event: WithdrawCollateral(address,uint256)
+          handler: handleWithdrawCollateral
+      file: ./src/lending-pool.ts

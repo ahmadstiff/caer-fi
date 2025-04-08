@@ -1,2 +1,1 @@
-export const arbitrumContract = '0xD5Dc593d8F05390E880F594788B3993D3D643603';
-export const eduChainContract = '0x9F19f49DA9D24382892a78D8d966441DCc4ee89b';
+export const arbitrumContract = '0xdE8eDfdA49a2ca5Fe693e4355a1d70D49018f3C4';

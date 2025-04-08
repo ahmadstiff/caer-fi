@@ -1,9 +1,9 @@
 import { Address, createWalletClient, http, parseUnits } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import dotenv from "dotenv";
-import { EduChain } from "../src/chains";
-import { eduChainContract } from "../src/contracts";
-import { eduChainAbi } from "../src/eduChainAbi";
+import { arbitrumSepolia } from "../src/chains";
+import { arbitrumContract } from "../src/contracts";
+import { arbitrumAbi } from "../src/arbitrumAbi";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import Cors from "cors";
 
@@ -15,7 +15,7 @@ const cors = Cors({
   methods: ["POST", "OPTIONS"],
 });
 
-// Helper untuk menjalankan CORS
+// Helper for running CORS
 function runMiddleware(req: VercelRequest, res: VercelResponse, fn: any) {
   return new Promise((resolve, reject) => {
     fn(req, res, (result: any) => {
@@ -32,9 +32,9 @@ const account = privateKeyToAccount(
   process.env.WALLET_PRIVATE_KEY as `0x${string}`
 );
 
-const eduChainClient = createWalletClient({
-  chain: EduChain,
-  transport: http("https://rpc.open-campus-codex.gelato.digital"),
+const arbitrumClient = createWalletClient({
+  chain: arbitrumSepolia,
+  transport: http("https://sepolia-rollup.arbitrum.io/rpc"),
   account,
 });
 
@@ -43,13 +43,13 @@ async function executeBorrow(
   amount: string
 ): Promise<`0x${string}`> {
   console.log(
-    `🔹 Executing borrow for ${user} on Ca Chain with ${amount} USDC`
+    `🔹 Executing borrow for ${user} on Arbitrum Sepolia with ${amount} USDC`
   );
   try {
     const amountParsed = parseUnits(amount, 6);
-    const tx = await eduChainClient.writeContract({
-      address: eduChainContract,
-      abi: eduChainAbi,
+    const tx = await arbitrumClient.writeContract({
+      address: arbitrumContract,
+      abi: arbitrumAbi,
       functionName: "borrowBySequencer",
       args: [amountParsed, user],
     });

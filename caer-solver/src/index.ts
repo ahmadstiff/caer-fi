@@ -2,28 +2,12 @@ import express from "express";
 import { Address, createWalletClient, http, parseUnits } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import dotenv from "dotenv";
-import { EduChain } from "./chains";
-import { eduChainAbi } from "./eduChainAbi";
-import { eduChainContract } from "./contracts";
+import { arbitrumSepolia } from "./chains";
+import { arbitrumAbi } from "../src/arbitrumAbi";
+import { arbitrumContract } from "../src/contracts";
+import { BorrowRequest } from "../src/types";
 
 dotenv.config();
-
-// Define interfaces
-interface BorrowRequest {
-  userAddress: string;
-  amount: string;
-}
-
-interface ApiResponse {
-  success: boolean;
-  message: string;
-  data?: {
-    transactionHash: `0x${string}`;
-    userAddress: Address;
-    amount: string;
-  };
-  error?: string;
-}
 
 // Initialize express app
 const app = express();
@@ -34,9 +18,9 @@ const account = privateKeyToAccount(
   process.env.WALLET_PRIVATE_KEY as `0x${string}`
 );
 
-const eduChainClient = createWalletClient({
-  chain: EduChain,
-  transport: http("https://rpc.open-campus-codex.gelato.digital"),
+const arbitrumClient = createWalletClient({
+  chain: arbitrumSepolia,
+  transport: http("https://sepolia-rollup.arbitrum.io/rpc"),
   account,
 });
 
@@ -59,9 +43,9 @@ async function executeBorrow(
     const amountParsed = parseUnits(amount, 6);
 
     // Send transaction to smart contract
-    const tx = await eduChainClient.writeContract({
-      address: eduChainContract,
-      abi: eduChainAbi,
+    const tx = await arbitrumClient.writeContract({
+      address: arbitrumContract,
+      abi: arbitrumAbi,
       functionName: "borrowBySequencer",
       args: [amountParsed, user],
     });
@@ -139,7 +123,6 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📝 POST /api/borrow - Execute borrow operation`);
-  console.log(`🔍 GET /health - Health check`);
 });
 
 export default app;

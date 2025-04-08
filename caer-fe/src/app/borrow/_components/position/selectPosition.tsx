@@ -15,7 +15,9 @@ import { headersGraphql } from "@/lib/subgraph/headersGraphql";
 import { urlGraphql } from "@/lib/subgraph/urlGraphql";
 import { useQuery } from "@tanstack/react-query";
 import { gql, request } from "graphql-request";
-import { useAccount } from "wagmi";
+import { useAccount, useReadContract } from "wagmi";
+import { lendingPool } from "@/constants/addresses";
+import { poolAbi } from "@/lib/abi/poolAbi";
 interface CreatePositionsResponse {
   createPositions: Array<{
     id: string;
@@ -34,33 +36,34 @@ const SelectPosition = ({
   setPositionLength: (length: number) => void;
 }) => {
   const { address } = useAccount();
-  const query = gql`
-      {
-        createPositions(
-          orderBy: blockTimestamp
-          where: { user: "${String(address)}" }
-        ) {
-          id
-          user
-          blockNumber
-          positionAddress
-        }
-      }
-    `;
-  const { data } = useQuery<CreatePositionsResponse>({
-    queryKey: ["data"],
-    async queryFn() {
-      return await request<CreatePositionsResponse>(
-        urlGraphql,
-        query,
-        {},
-        headersGraphql
-      );
-    },
-  });
-  useEffect(() => {
-    setPositionLength(data?.createPositions.length ?? 0);
-  }, [data]);
+  const [positions, setPositions] = React.useState<[any, bigint][]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+
+  const { data: currentPosition } = useReadContract({
+    address: lendingPool,
+    abi: poolAbi,
+    functionName: "addressPositions",
+    args: [address, BigInt(currentIndex)],
+  }) as { data: [any, bigint] | undefined };
+
+  React.useEffect(() => {
+    if (!address) {
+      setPositions([]);
+      setPositionLength(0);
+      setIsLoading(false);
+      return;
+    }
+
+    if (currentPosition) {
+      setPositions(prev => [...prev, currentPosition]);
+      setCurrentIndex(prev => prev + 1);
+    } else {
+      setPositionLength(positions.length);
+      setIsLoading(false);
+    }
+  }, [currentPosition, address, positions.length, setPositionLength]);
+
   return (
     <div>
       <Select
@@ -75,17 +78,23 @@ const SelectPosition = ({
             <SelectLabel className="text-[#07094d]">
               Positions Address
             </SelectLabel>
-            {data
-              ? data.createPositions.map((position) => (
-                <SelectItem
-                  className="transition-colors duration-100 cursor-pointer text-[#07094d]"
-                  key={position.id}
-                  value={position.positionAddress}
-                >
-                  {position.positionAddress}
-                </SelectItem>
-              ))
-              : "No positions found"}
+            {(() => {
+              if (isLoading) {
+                return <div className="text-[#07094d] p-2">Loading positions...</div>;
+              }
+              if (positions.length > 0) {
+                return positions.map((position, index) => (
+                  <SelectItem
+                    className="transition-colors duration-100 cursor-pointer text-[#07094d]"
+                    key={index}
+                    value={position.toString()}
+                  >
+                    {position}
+                  </SelectItem>
+                ));
+              }
+              return <div className="text-[#07094d] p-2">No positions found</div>;
+            })()}
           </SelectGroup>
         </SelectContent>
       </Select>

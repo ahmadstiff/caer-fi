@@ -36,7 +36,7 @@ export default function ChainSelector({
             id: 62851553,
             name: "Ca Chain",
             type: "Testnet",
-            logoUrl: "/jembar.png",
+            logoUrl: "/caer.png",
           },
           {
             id: 8453,

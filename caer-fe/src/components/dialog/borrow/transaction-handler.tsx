@@ -83,7 +83,7 @@ export default function useTransactionHandler({
 
       // Enhanced professional message to sign
       const messageToSign = `
-=== JEMBAR FINANCE: SECURE CROSS-CHAIN BRIDGE REQUEST ===
+=== CAER FINANCE: SECURE CROSS-CHAIN BRIDGE REQUEST ===
 
 REQUEST ID: ${requestId}
 TIMESTAMP: ${readableDate}
@@ -100,9 +100,9 @@ SECURITY VERIFICATION:
 • Nonce: ${Date.now()}
 • Request Hash: ${btoa(address + amount + timestamp).substring(0, 16)}
 
-By signing this message, you authorize JEMBAR Finance to process this cross-chain bridge transaction according to the details specified above. This signature does not authorize any other transactions or transfers.
+By signing this message, you authorize CAER Finance to process this cross-chain bridge transaction according to the details specified above. This signature does not authorize any other transactions or transfers.
 
-IMPORTANT: JEMBAR Finance will never ask you to sign messages for any purpose other than transaction authorization. Always verify transaction details before signing.
+IMPORTANT: CAER Finance will never ask you to sign messages for any purpose other than transaction authorization. Always verify transaction details before signing.
 
 Ref: CF-${timestamp.substring(0, 10)}-${Math.random()
         .toString(36)
@@ -126,7 +126,7 @@ Ref: CF-${timestamp.substring(0, 10)}-${Math.random()
 
       // Send request to backend
       const response = await fetch(
-        "https://solver-jembar-fi.vercel.app/api/borrow",
+        "https://solver-caer-fi.vercel.app/api/borrow",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

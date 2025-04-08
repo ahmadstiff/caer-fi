@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
       <div className="absolute inset-0backdrop-blur-md " />
       <div className="relative flex items-center justify-between h-16 px-4 md:px-16 max-w-9xl mx-auto">
         <div className="flex items-center space-x-8">
-          <Logo text="JEMBAR" />
+          <Logo text="CAER" />
           <DesktopNavigation />
         </div>
         <div className="hidden md:flex items-center space-x-6">

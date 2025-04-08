@@ -27,9 +27,9 @@
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/ghozzza/jembar
-cd jembar
-cd jembar-fe
+git clone https://github.com/ghozzza/caer-fi
+cd caer-fi
+cd caer-fe
 ```
 
 2. Install dependencies:

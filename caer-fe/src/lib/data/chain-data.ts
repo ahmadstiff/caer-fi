@@ -9,7 +9,7 @@ export const caChain = defineChain({
   },
   testnet: true,
   iconBackground: "#ffff",
-  iconUrl: "/jembar.png"
+  iconUrl: "/caer.png"
 });
 export const arbitrumSepolia = defineChain({
   id: 421614,

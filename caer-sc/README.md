@@ -19,9 +19,9 @@ Before you begin, ensure your system has the following installed:
 ## 📋 Clone the Repository
 Clone the Caér smart contracts repository from GitHub:
 ```sh
-git clone https://github.com/ghozzza/jembar
-cd jembar
-cd jembar-sc
+git clone https://github.com/ghozzza/caer-fi
+cd caer-fi
+cd caer-sc
 ```
 
 ---

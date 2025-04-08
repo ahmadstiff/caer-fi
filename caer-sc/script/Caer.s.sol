@@ -15,7 +15,7 @@ import {LendingPool} from "../src/LendingPool.sol";
 import {Position} from "../src/Position.sol";
 import {LendingPoolSequencer} from "../src/LendingPoolSequencer.sol";
 
-contract JembarScript is Script {
+contract CaerScript is Script {
     MockWETH public mockWETH;
     MockWBTC public mockWBTC;
     MockUSDC public mockUSDC;

@@ -4,6 +4,7 @@ import ena from "../../public/ena.png";
 import usdc from "../../public/usdc.png";
 import weth from "../../public/weth.png";
 import wbtc from "../../public/wbtc.png";
+import usdt from "../../public/usdt.png";
 
 export interface TokenOption {
   name: string;
@@ -48,5 +49,12 @@ export const TOKEN_OPTIONS: TokenOption[] = [
     address: mockUsde,
     logo: usde.src,
     decimals: 18,
+  },
+  {
+    name: "USDT",
+    namePrice: "USDT",
+    address: mockUsde,
+    logo: usdt.src,
+    decimals: 6,
   },
 ];

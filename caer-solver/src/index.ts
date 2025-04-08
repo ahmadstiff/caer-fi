@@ -2,8 +2,9 @@ import express from "express";
 import { Address, createWalletClient, http, parseUnits } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import dotenv from "dotenv";
-import { caChain } from "./chains";
-import { caChainAbi } from "./caChainAbi";
+import { EduChain } from "./chains";
+import { eduChainAbi } from "./eduChainAbi";
+import { eduChainContract } from "./contracts";
 
 dotenv.config();
 
@@ -33,11 +34,9 @@ const account = privateKeyToAccount(
   process.env.WALLET_PRIVATE_KEY as `0x${string}`
 );
 
-const caChainContract = "0xd418e17746f728da31508dd47a33834b8773d07c" as Address;
-
-const caChainClient = createWalletClient({
-  chain: caChain,
-  transport: http("http://44.213.128.45:8547/"),
+const eduChainClient = createWalletClient({
+  chain: EduChain,
+  transport: http("https://rpc.open-campus-codex.gelato.digital"),
   account,
 });
 
@@ -60,9 +59,9 @@ async function executeBorrow(
     const amountParsed = parseUnits(amount, 6);
 
     // Send transaction to smart contract
-    const tx = await caChainClient.writeContract({
-      address: caChainContract,
-      abi: caChainAbi,
+    const tx = await eduChainClient.writeContract({
+      address: eduChainContract,
+      abi: eduChainAbi,
       functionName: "borrowBySequencer",
       args: [amountParsed, user],
     });

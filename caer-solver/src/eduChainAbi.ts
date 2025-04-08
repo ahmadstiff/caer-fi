@@ -1,4 +1,4 @@
-export const caChainAbi = [
+export const eduChainAbi = [
   {
     inputs: [
       { internalType: "address", name: "_collateralToken", type: "address" },

@@ -1,8 +1,9 @@
 import { Address, createWalletClient, http, parseUnits } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import dotenv from "dotenv";
-import { caChain } from "../src/chains";
-import { caChainAbi } from "../src/caChainAbi";
+import { EduChain } from "../src/chains";
+import { eduChainContract } from "../src/contracts";
+import { eduChainAbi } from "../src/eduChainAbi";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import Cors from "cors";
 
@@ -10,7 +11,7 @@ dotenv.config();
 
 // Setup CORS
 const cors = Cors({
-  origin: "*", // Bisa diubah ke domain spesifik jika perlu keamanan lebih
+  origin: "*",
   methods: ["POST", "OPTIONS"],
 });
 
@@ -31,11 +32,9 @@ const account = privateKeyToAccount(
   process.env.WALLET_PRIVATE_KEY as `0x${string}`
 );
 
-const caChainContract = "0xd418e17746f728da31508dd47a33834b8773d07c" as Address;
-
-const caChainClient = createWalletClient({
-  chain: caChain,
-  transport: http("http://44.213.128.45:8547/"),
+const eduChainClient = createWalletClient({
+  chain: EduChain,
+  transport: http("https://rpc.open-campus-codex.gelato.digital"),
   account,
 });
 
@@ -48,9 +47,9 @@ async function executeBorrow(
   );
   try {
     const amountParsed = parseUnits(amount, 6);
-    const tx = await caChainClient.writeContract({
-      address: caChainContract,
-      abi: caChainAbi,
+    const tx = await eduChainClient.writeContract({
+      address: eduChainContract,
+      abi: eduChainAbi,
       functionName: "borrowBySequencer",
       args: [amountParsed, user],
     });
@@ -81,12 +80,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           .json({ success: false, message: "Invalid user address format" });
       }
       if (isNaN(Number(amount)) || Number(amount) <= 0) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-            message: "Amount must be a positive number",
-          });
+        return res.status(400).json({
+          success: false,
+          message: "Amount must be a positive number",
+        });
       }
       const txHash = await executeBorrow(userAddress as Address, amount);
       res.status(200).json({
@@ -96,13 +93,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     } catch (error: any) {
       console.error("API Error:", error);
-      res
-        .status(500)
-        .json({
-          success: false,
-          message: "Failed to execute borrow operation",
-          error: error.message,
-        });
+      res.status(500).json({
+        success: false,
+        message: "Failed to execute borrow operation",
+        error: error.message,
+      });
     }
   } else {
     res.status(405).json({ success: false, message: "Method Not Allowed" });

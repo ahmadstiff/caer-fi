@@ -8,24 +8,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import React, { useEffect } from "react";
-import CreatePositionsByUser from "@/components/subgraph/createPositionsByUser";
-
-import { headersGraphql } from "@/lib/subgraph/headersGraphql";
-import { urlGraphql } from "@/lib/subgraph/urlGraphql";
-import { useQuery } from "@tanstack/react-query";
-import { gql, request } from "graphql-request";
+import React, { useEffect, useState } from "react";
 import { useAccount, useReadContract } from "wagmi";
 import { lendingPool } from "@/constants/addresses";
 import { poolAbi } from "@/lib/abi/poolAbi";
-interface CreatePositionsResponse {
-  createPositions: Array<{
-    id: string;
-    user: string;
-    blockNumber: string;
-    positionAddress: string;
-  }>;
-}
 const SelectPosition = ({
   positionAddress,
   setPositionAddress,
@@ -36,9 +22,9 @@ const SelectPosition = ({
   setPositionLength: (length: number) => void;
 }) => {
   const { address } = useAccount();
-  const [positions, setPositions] = React.useState<[any, bigint][]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [positions, setPositions] = useState<[any, bigint][]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const { data: currentPosition } = useReadContract({
     address: lendingPool,
@@ -47,7 +33,7 @@ const SelectPosition = ({
     args: [address, BigInt(currentIndex)],
   }) as { data: [any, bigint] | undefined };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!address) {
       setPositions([]);
       setPositionLength(0);

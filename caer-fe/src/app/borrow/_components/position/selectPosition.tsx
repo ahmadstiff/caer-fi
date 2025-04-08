@@ -67,24 +67,24 @@ const SelectPosition = ({
         value={positionAddress}
         onValueChange={(value) => setPositionAddress(value)}
       >
-        <SelectTrigger className="w-full bg-slate-900/90 border-slate-800 text-slate-100">
+        <SelectTrigger className="w-full bg-white border-[#01ECBE]/30 text-[#07094d]">
           <SelectValue placeholder="Select a position address" />
         </SelectTrigger>
-        <SelectContent className="bg-slate-200 border-0">
+        <SelectContent className="bg-white border-[#01ECBE]/30">
           <SelectGroup>
-            <SelectLabel className="text-slate-800">
+            <SelectLabel className="text-[#07094d]">
               Positions Address
             </SelectLabel>
             {data
               ? data.createPositions.map((position) => (
-                  <SelectItem
-                    className="transition-colors duration-100 cursor-pointer"
-                    key={position.id}
-                    value={position.positionAddress}
-                  >
-                    {position.positionAddress}
-                  </SelectItem>
-                ))
+                <SelectItem
+                  className="transition-colors duration-100 cursor-pointer text-[#07094d]"
+                  key={position.id}
+                  value={position.positionAddress}
+                >
+                  {position.positionAddress}
+                </SelectItem>
+              ))
               : "No positions found"}
           </SelectGroup>
         </SelectContent>

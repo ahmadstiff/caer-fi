@@ -49,11 +49,11 @@ export const TextHoverEffect = ({
         >
           {hovered && (
             <>
-              <stop offset="0%" stopColor="#eab308" />
-              <stop offset="25%" stopColor="#ef4444" />
-              <stop offset="50%" stopColor="#3b82f6" />
-              <stop offset="75%" stopColor="#06b6d4" />
-              <stop offset="100%" stopColor="#8b5cf6" />
+              <stop offset="0%" stopColor="#141beb" />
+              <stop offset="25%" stopColor="#141beb" />
+              <stop offset="50%" stopColor="#01ECBE" />
+              <stop offset="75%" stopColor="#01ECBE" />
+              <stop offset="100%" stopColor="#141beb" />
             </>
           )}
         </linearGradient>
@@ -65,14 +65,6 @@ export const TextHoverEffect = ({
           initial={{ cx: "50%", cy: "50%" }}
           animate={maskPosition}
           transition={{ duration: duration ?? 0, ease: "easeOut" }}
-
-          // example for a smoother animation below
-
-          //   transition={{
-          //     type: "spring",
-          //     stiffness: 300,
-          //     damping: 50,
-          //   }}
         >
           <stop offset="0%" stopColor="white" />
           <stop offset="100%" stopColor="black" />
@@ -93,7 +85,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0"
-        className="fill-transparent  stroke-neutral-200 font-[helvetica] text-8xl font-bold dark:stroke-neutral-800"
+        className="fill-transparent stroke-[#b3b3b6] font-[helvetica] text-8xl font-bold"
         style={{ opacity: hovered ? 1 : 0 }}
       >
         {text}
@@ -104,7 +96,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="1"
-        className="fill-transparent stroke-[#2222229c] font-[helvetica] text-8xl font-bold dark:stroke-neutral-900"
+        className="fill-transparent stroke-[#eaeaea3e] font-[helvetica] text-8xl font-bold"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
@@ -126,7 +118,6 @@ export const TextHoverEffect = ({
         strokeWidth="1.2"
         mask="url(#textMask)"
         className="fill-transparent font-[helvetica] text-8xl font-bold"
-
       >
         {text}
       </text>

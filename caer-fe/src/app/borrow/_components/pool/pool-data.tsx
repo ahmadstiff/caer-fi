@@ -49,17 +49,17 @@ const PoolData = () => {
     <div className="space-y-6 px-6">
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-medium text-slate-300 uppercase tracking-wider">
+          <h3 className="text-sm font-medium text-[#c0c0ff] uppercase tracking-wider">
             COLLATERAL
           </h3>
-          <div className="text-xs bg-slate-800 border border-slate-700 text-slate-300 px-2 py-0.5 rounded-full">
+          <div className="text-xs bg-[#e2e2ff] border border-[#01ECBE]/20 text-[#07094d] px-2 py-0.5 rounded-full">
             Supplied
           </div>
         </div>
-        <div className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden p-4">
+        <div className=" rounded-xl border border-[#01ECBE]/20 overflow-hidden p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 rounded-full border border-[#01ECBE]/20 flex items-center justify-center overflow-hidden">
                 <Image
                   src={
                     TOKEN_OPTIONS.find(
@@ -73,14 +73,14 @@ const PoolData = () => {
               </div>
               <div>
                 <div className="font-semibold text-white">WETH</div>
-                <div className="text-xs text-slate-400">Collateral Asset</div>
+                <div className="text-xs text-[#c0c0ff]">Collateral Asset</div>
               </div>
             </div>
             <div className="text-right">
               <div className="font-semibold text-white">
                 {/* {formatValue((userCollateral))} */}
               </div>
-              <div className="text-xs text-slate-400">
+              <div className="text-xs text-[#c0c0ff]">
                 {/* ≈ {formatUSD((userCollateral))} */}
               </div>
             </div>
@@ -91,21 +91,21 @@ const PoolData = () => {
           </div>
         </div>
       </div>
-
+  
       {/* Borrow Section */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-medium text-slate-300 uppercase tracking-wider">
+          <h3 className="text-sm font-medium text-[#c0c0ff] uppercase tracking-wider">
             BORROW
           </h3>
-          <div className="text-xs bg-slate-800 border border-slate-700 text-slate-300 px-2 py-0.5 rounded-full">
+          <div className="text-xs border bg-[#e2e2ff] border-[#01ECBE]/20 text-[#07094d] px-2 py-0.5 rounded-full">
             Available
           </div>
         </div>
-        <div className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden p-4">
+        <div className="rounded-xl border border-[#01ECBE]/20 overflow-hidden p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 rounded-full border border-[#01ECBE]/20 flex items-center justify-center overflow-hidden">
                 <Image
                   src={
                     TOKEN_OPTIONS.find(
@@ -119,14 +119,14 @@ const PoolData = () => {
               </div>
               <div>
                 <div className="font-semibold text-white">USDC</div>
-                <div className="text-xs text-slate-400">Borrow Asset</div>
+                <div className="text-xs text-[#c0c0ff]">Borrow Asset</div>
               </div>
             </div>
             <div className="text-right">
               <div className="font-semibold text-white">
                 {/* {formatValue(Number(tokenBalanceByPosition), 6)} */}
               </div>
-              <div className="text-xs text-slate-400">
+              <div className="text-xs text-[#c0c0ff]">
                 {/* ≈ {formatUSD(Number(tokenBalanceByPosition), 6)} */}
               </div>
             </div>

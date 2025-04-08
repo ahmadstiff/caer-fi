@@ -29,7 +29,7 @@ export default function SupplyDialogCol({ token }: SupplyDialogProps) {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="bg-gradient-to-r from-indigo-400 to-purple-500 hover:from-purple-600 hover:to-indigo-500 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 rounded-lg"
+          className="bg-gradient-to-r from-[#01ECBE] to-[#141beb] hover:from-[#141beb] hover:to-[#01ECBE] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg"
           size="lg"
         >
           Supply {token}
@@ -101,7 +101,7 @@ export default function SupplyDialogCol({ token }: SupplyDialogProps) {
             className={`w-full h-12 text-base font-medium rounded-lg ${
               isProcessing
                 ? "bg-slate-200 text-slate-500"
-                : "bg-gradient-to-r from-blue-500 to-indigo-400 hover:from-blue-600 hover:to-indigo-500 text-white shadow-md hover:shadow-lg"
+                : "bg-gradient-to-r from-[#01ECBE] to-[#141beb] hover:from-[#141beb] hover:to-[#01ECBE] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg"
             }`}
           >
             {isProcessing ? (

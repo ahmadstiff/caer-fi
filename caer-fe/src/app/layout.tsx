@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Geist, Azeret_Mono as Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
-import { darkTheme, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { lightTheme, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { config } from "@/lib/wagmi";
@@ -34,13 +34,13 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased min-h-screen bg-[#000000]`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased min-h-screen bg-[#010112]`}
       >
         <WagmiProvider config={config}>
           <QueryClientProvider client={queryClient}>
             <RainbowKitProvider
-              theme={darkTheme({
-                accentColor: "#7b3fe4",
+              theme={lightTheme({
+                accentColor: "#141beb",
                 accentColorForeground: "white",
                 borderRadius: "medium",
                 fontStack: "system",

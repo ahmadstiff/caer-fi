@@ -58,7 +58,7 @@ export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="bg-gradient-to-r from-indigo-400 to-blue-600 text-white shadow-md rounded-lg"
+          className="bg-gradient-to-r from-[#141beb] to-[#01ECBE] hover:from-[#01ECBE] hover:to-[#141beb] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg"
           size="lg"
         >
           Borrow ${token}
@@ -91,7 +91,7 @@ export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
         <DialogFooter>
           <Button
             onClick={handleTransaction}
-            className="w-full bg-gradient-to-r from-indigo-400 to-blue-600 text-white rounded-lg"
+            className="bg-gradient-to-r from-[#141beb] to-[#01ECBE] hover:from-[#01ECBE] hover:to-[#141beb] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg"
             disabled={isLoading}
           >
             {isLoading ? "Processing..." : `Borrow ${token}`}

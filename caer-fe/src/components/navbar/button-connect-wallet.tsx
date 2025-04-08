@@ -33,7 +33,7 @@ const ButtonConnectWallet = () => {
                 <button
                   onClick={openConnectModal}
                   type="button"
-                  className="flex items-center justify-center space-x-1.5 px-6 py-1.5 rounded-3xl bg-[#1a1b23] text-white font-medium transition-all hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] w-full"
+                  className="flex items-center justify-center space-x-1.5 px-6 py-1.5 rounded-3xl bg-white text-[#07094d] font-medium transition-all hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] w-full"
                 >
                   <span>Connect Wallet</span>
                 </button>
@@ -49,7 +49,7 @@ const ButtonConnectWallet = () => {
                 <button
                   onClick={openChainModal}
                   type="button"
-                  className="flex items-center justify-center space-x-2 px-6 py-1.5 rounded-3xl bg-[#1a1b23] text-destructive-foreground font-medium transition-all hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] w-full"
+                  className="flex items-center justify-center space-x-2 px-6 py-1.5 rounded-3xl bg-white text-red-500 font-medium transition-all hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] w-full"
                 >
                   <span>Wrong Network</span>
                   <ChevronDown className="w-4 h-4 ml-1" />
@@ -66,7 +66,7 @@ const ButtonConnectWallet = () => {
                 <button
                   onClick={openChainModal}
                   type="button"
-                  className="flex items-center justify-center space-x-1 px-3 py-1.5 rounded-3xl bg-[#1a1b23] text-white hover:opacity-90 font-medium transition-all"
+                  className="flex items-center justify-center space-x-1 px-3 py-1.5 rounded-3xl bg-white text-[#07094d] hover:opacity-90 font-medium transition-all"
                 >
                   {chain.hasIcon && chain.iconUrl && (
                     <img
@@ -87,7 +87,7 @@ const ButtonConnectWallet = () => {
                 <button
                   onClick={openAccountModal}
                   type="button"
-                  className="flex items-center justify-center space-x-1 px-3 py-1.5 rounded-3xl bg-[#1a1b23] text-white hover:opacity-90 font-medium transition-all"
+                  className="flex items-center justify-center space-x-1 px-3 py-1.5 rounded-3xl bg-white text-[#07094d] hover:opacity-90 font-medium transition-al"
                 >
                   <span className="truncate max-w-[120px]">
                     {account.displayName}

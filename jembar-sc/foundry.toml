@@ -6,7 +6,7 @@ libs = ["lib"]
 [rpc_endpoints]
 op_sepolia = "https://sepolia.optimism.io"
 rise_sepolia = "https://testnet.riselabs.xyz"
-arb_sepolia = "https://arbitrum-sepolia.drpc.org"
+arb_sepolia = "https://sepolia-rollup.arbitrum.io/rpc"
 cachain_sepolia = "http://44.213.128.45:8547/"
 educhain = "https://rpc.open-campus-codex.gelato.digital"
 

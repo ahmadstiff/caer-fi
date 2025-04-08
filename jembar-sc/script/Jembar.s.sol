@@ -31,9 +31,9 @@ contract JembarScript is Script {
     function setUp() public {
         // vm.createSelectFork(vm.rpcUrl("rise_sepolia"));
         // vm.createSelectFork(vm.rpcUrl("op_sepolia"));
-        // vm.createSelectFork(vm.rpcUrl("arb_sepolia"));
+        vm.createSelectFork(vm.rpcUrl("arb_sepolia"));
         // vm.createSelectFork(vm.rpcUrl("cachain_sepolia"));
-        vm.createSelectFork(vm.rpcUrl("educhain"));
+        // vm.createSelectFork(vm.rpcUrl("educhain"));
     }
 
     function run() public {

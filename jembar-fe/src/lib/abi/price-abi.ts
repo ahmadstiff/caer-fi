@@ -1,19 +1,7 @@
 export const priceAbi = [
-  {
-    inputs: [],
-    stateMutability: "nonpayable",
-    type: "constructor",
-  },
-  {
-    inputs: [],
-    name: "BasePriceZero",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "QuotePriceZero",
-    type: "error",
-  },
+  { inputs: [], stateMutability: "nonpayable", type: "constructor" },
+  { inputs: [], name: "BasePriceZero", type: "error" },
+  { inputs: [], name: "QuotePriceZero", type: "error" },
   {
     anonymous: false,
     inputs: [
@@ -55,12 +43,7 @@ export const priceAbi = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: false,
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
+      { indexed: false, internalType: "string", name: "name", type: "string" },
       {
         indexed: false,
         internalType: "address",
@@ -80,12 +63,7 @@ export const priceAbi = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: false,
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
+      { indexed: false, internalType: "string", name: "name", type: "string" },
       {
         indexed: false,
         internalType: "address",
@@ -117,12 +95,7 @@ export const priceAbi = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: false,
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
+      { indexed: false, internalType: "string", name: "name", type: "string" },
       {
         indexed: false,
         internalType: "address",
@@ -140,13 +113,7 @@ export const priceAbi = [
     type: "event",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_user",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "_user", type: "address" }],
     name: "addOwner",
     outputs: [],
     stateMutability: "nonpayable",
@@ -154,16 +121,8 @@ export const priceAbi = [
   },
   {
     inputs: [
-      {
-        internalType: "address",
-        name: "_borrow",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_priceAddress",
-        type: "address",
-      },
+      { internalType: "address", name: "_borrow", type: "address" },
+      { internalType: "address", name: "_priceAddress", type: "address" },
     ],
     name: "addPairPriceBorrow",
     outputs: [],
@@ -172,16 +131,8 @@ export const priceAbi = [
   },
   {
     inputs: [
-      {
-        internalType: "address",
-        name: "_collateral",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_priceAddress",
-        type: "address",
-      },
+      { internalType: "address", name: "_collateral", type: "address" },
+      { internalType: "address", name: "_priceAddress", type: "address" },
     ],
     name: "addPairPriceCollateral",
     outputs: [],
@@ -190,21 +141,9 @@ export const priceAbi = [
   },
   {
     inputs: [
-      {
-        internalType: "string",
-        name: "_name",
-        type: "string",
-      },
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_priceAddress",
-        type: "address",
-      },
+      { internalType: "string", name: "_name", type: "string" },
+      { internalType: "address", name: "_token", type: "address" },
+      { internalType: "address", name: "_priceAddress", type: "address" },
     ],
     name: "addPriceFeed",
     outputs: [],
@@ -213,26 +152,10 @@ export const priceAbi = [
   },
   {
     inputs: [
-      {
-        internalType: "string",
-        name: "_name",
-        type: "string",
-      },
-      {
-        internalType: "address",
-        name: "_tokenAddres",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_price",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_decimal",
-        type: "uint256",
-      },
+      { internalType: "string", name: "_name", type: "string" },
+      { internalType: "address", name: "_tokenAddres", type: "address" },
+      { internalType: "uint256", name: "_price", type: "uint256" },
+      { internalType: "uint256", name: "_decimal", type: "uint256" },
     ],
     name: "addPriceManual",
     outputs: [],
@@ -240,41 +163,17 @@ export const priceAbi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "", type: "address" }],
     name: "baseFeed",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
+    outputs: [{ internalType: "address", name: "", type: "address" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [
-      {
-        internalType: "string",
-        name: "_name",
-        type: "string",
-      },
-      {
-        internalType: "address",
-        name: "_priceAddress",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_index",
-        type: "uint256",
-      },
+      { internalType: "string", name: "_name", type: "string" },
+      { internalType: "address", name: "_priceAddress", type: "address" },
+      { internalType: "uint256", name: "_index", type: "uint256" },
     ],
     name: "editPriceFeed",
     outputs: [],
@@ -282,269 +181,114 @@ export const priceAbi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "_token", type: "address" }],
     name: "getBaseDecimal",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "_token", type: "address" }],
     name: "getBaseDescription",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
+    outputs: [{ internalType: "string", name: "", type: "string" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [
-      {
-        internalType: "address",
-        name: "_collateral",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_borrow",
-        type: "address",
-      },
+      { internalType: "address", name: "_collateral", type: "address" },
+      { internalType: "address", name: "_borrow", type: "address" },
     ],
     name: "getPrice",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [
-      {
-        internalType: "address",
-        name: "_tokenFrom",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_tokenTo",
-        type: "address",
-      },
+      { internalType: "address", name: "_tokenFrom", type: "address" },
+      { internalType: "address", name: "_tokenTo", type: "address" },
     ],
     name: "getPriceTrade",
     outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+      { internalType: "uint256", name: "", type: "uint256" },
+      { internalType: "uint256", name: "", type: "uint256" },
     ],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "_token", type: "address" }],
     name: "getQuoteDecimal",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "_token", type: "address" }],
     name: "getQuoteDescription",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
+    outputs: [{ internalType: "string", name: "", type: "string" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "_token", type: "address" }],
     name: "priceBorrow",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "_token", type: "address" }],
     name: "priceCollateral",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     name: "priceLists",
     outputs: [
-      {
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-      {
-        internalType: "address",
-        name: "feed",
-        type: "address",
-      },
+      { internalType: "string", name: "name", type: "string" },
+      { internalType: "address", name: "feed", type: "address" },
     ],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "", type: "address" }],
     name: "quoteFeed",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
+    outputs: [{ internalType: "address", name: "", type: "address" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "", type: "address" }],
     name: "subOwner",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+      { internalType: "uint256", name: "_amount", type: "uint256" },
+      { internalType: "address", name: "_tokenFrom", type: "address" },
+      { internalType: "address", name: "_tokenTo", type: "address" },
     ],
+    name: "tokenCalculator",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "", type: "address" }],
     name: "tokenPrices",
     outputs: [
-      {
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-      {
-        internalType: "uint256",
-        name: "price",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "decimal",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "startedAt",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "updatedAt",
-        type: "uint256",
-      },
+      { internalType: "string", name: "name", type: "string" },
+      { internalType: "uint256", name: "price", type: "uint256" },
+      { internalType: "uint256", name: "decimal", type: "uint256" },
+      { internalType: "uint256", name: "startedAt", type: "uint256" },
+      { internalType: "uint256", name: "updatedAt", type: "uint256" },
     ],
     stateMutability: "view",
     type: "function",

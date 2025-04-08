@@ -9,7 +9,6 @@ export const poolAbi = [
     stateMutability: "nonpayable",
     type: "constructor",
   },
-  { inputs: [], name: "FlashloanFailed", type: "error" },
   { inputs: [], name: "InsufficientCollateral", type: "error" },
   { inputs: [], name: "InsufficientLiquidity", type: "error" },
   { inputs: [], name: "InsufficientShares", type: "error" },
@@ -18,16 +17,13 @@ export const poolAbi = [
   { inputs: [], name: "LTVExceedMaxAmount", type: "error" },
   { inputs: [], name: "PositionNotCreated", type: "error" },
   { inputs: [], name: "PositionUnavailable", type: "error" },
-  { inputs: [], name: "ProhibitedToBuy", type: "error" },
   { inputs: [], name: "ReentrancyGuardReentrantCall", type: "error" },
   {
     inputs: [{ internalType: "address", name: "token", type: "address" }],
     name: "SafeERC20FailedOperation",
     type: "error",
   },
-  { inputs: [], name: "SwitchToCollateralToken", type: "error" },
   { inputs: [], name: "TokenNotAvailable", type: "error" },
-  { inputs: [], name: "TradingAccountListed", type: "error" },
   { inputs: [], name: "ZeroAmount", type: "error" },
   {
     anonymous: false,
@@ -50,7 +46,6 @@ export const poolAbi = [
         name: "shares",
         type: "uint256",
       },
-      { indexed: false, internalType: "bool", name: "bridge", type: "bool" },
     ],
     name: "BorrowByPosition",
     type: "event",
@@ -86,17 +81,24 @@ export const poolAbi = [
       {
         indexed: false,
         internalType: "address",
+        name: "positionAddress",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
         name: "token",
         type: "address",
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "amount",
+        name: "price",
         type: "uint256",
       },
+      { indexed: false, internalType: "string", name: "name", type: "string" },
     ],
-    name: "Flashloan",
+    name: "ListingTrading",
     type: "event",
   },
   {
@@ -282,27 +284,6 @@ export const poolAbi = [
     type: "function",
   },
   {
-    inputs: [{ internalType: "address", name: "", type: "address" }],
-    name: "addressArrayLocation",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    name: "addressPositionDetails",
-    outputs: [{ internalType: "address", name: "", type: "address" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    name: "addressPositionOwners",
-    outputs: [{ internalType: "address", name: "", type: "address" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [
       { internalType: "address", name: "", type: "address" },
       { internalType: "uint256", name: "", type: "uint256" },
@@ -338,13 +319,6 @@ export const poolAbi = [
   },
   {
     inputs: [],
-    name: "counter",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "createPosition",
     outputs: [],
     stateMutability: "nonpayable",
@@ -359,7 +333,7 @@ export const poolAbi = [
   },
   {
     inputs: [
-      { internalType: "uint256", name: "_positionIndex", type: "uint256" },
+      { internalType: "address", name: "_positionAddress", type: "address" },
       { internalType: "address", name: "_token", type: "address" },
       { internalType: "uint256", name: "_price", type: "uint256" },
       { internalType: "string", name: "_name", type: "string" },
@@ -399,13 +373,6 @@ export const poolAbi = [
     name: "repayWithSelectedToken",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "router",
-    outputs: [{ internalType: "address", name: "", type: "address" }],
-    stateMutability: "view",
     type: "function",
   },
   {

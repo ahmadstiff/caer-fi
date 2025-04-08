@@ -80,12 +80,12 @@ const FaucetsCardForm = () => {
     <div>
       <div className="px-7 w-full">
         <Select value={selectedToken} onValueChange={setSelectedToken}>
-          <SelectTrigger className="w-full bg-slate-900/90 border-slate-800 text-slate-100">
+          <SelectTrigger className="w-full bg-white border-[#01ECBE]/30 text-[#07094d]">
             <SelectValue placeholder="Select a token" />
           </SelectTrigger>
-          <SelectContent className="bg-slate-200 border-0">
+          <SelectContent className="bg-white border-[#01ECBE]/30">
             <SelectGroup>
-              <SelectLabel className="text-slate-800">Tokens</SelectLabel>
+              <SelectLabel className="text-[#07094d]">Tokens</SelectLabel>
               {TOKEN_OPTIONS.map((token) => (
                 <SelectItem
                   className="transition-colors duration-100 cursor-pointer"
@@ -101,11 +101,11 @@ const FaucetsCardForm = () => {
 
         <Button
           onClick={handlePriceFeeds}
-          className="w-full bg-blue-950/90 text-blue-400 border-blue-800 hover:bg-blue-800/50 cursor-pointer mt-5 transition-colors duration-300"
+          className="w-full bg-[#141beb] text-white hover:bg-[#141beb]/80 cursor-pointer mt-5 transition-colors duration-300"
         >
           {isTransactionPending ? "Loading..." : "Pricefeeds"}
         </Button>
-        <p className="text-sm text-slate-500 mt-2">
+        <p className="text-sm text-[#07094d]/70 mt-2">
           Now you can see the price of the token in the price feed{" "}
           {price?.[1]
             ? Number(price[1]) /

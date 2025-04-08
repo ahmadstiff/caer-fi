@@ -141,7 +141,7 @@ export const WithdrawDialog = () => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="bg-gradient-to-r from-purple-500 to-indigo-400 hover:from-purple-600 hover:to-indigo-500 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 rounded-lg border-0"
+          className="bg-gradient-to-r from-[#01ECBE] to-[#141beb] hover:from-[#141beb] hover:to-[#01ECBE] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg border-0"
           size="lg"
         >
           <ArrowUpRight className="mr-2 h-5 w-5" /> Withdraw
@@ -193,7 +193,7 @@ export const WithdrawDialog = () => {
             className={`w-full h-12 text-base font-medium rounded-lg ${
               isPending
                 ? "bg-slate-200 text-slate-500"
-                : "bg-gradient-to-r from-purple-500 to-indigo-400 hover:from-purple-600 hover:to-indigo-500 text-white shadow-md hover:shadow-lg"
+                : "bg-gradient-to-r from-[#01ECBE] to-[#141beb] hover:from-[#141beb] hover:to-[#01ECBE] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg"
             }`}
           >
             {isPending ? (

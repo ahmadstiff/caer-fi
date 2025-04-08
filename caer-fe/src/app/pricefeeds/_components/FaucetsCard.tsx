@@ -6,7 +6,7 @@ import FaucetsCardForm from "./FaucetsCardForm";
 const FaucetsCard = () => {
   return (
     <div>
-      <Card className="bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700/50 shadow-xl overflow-hidden">
+      <Card className="bg-white border-[#01ECBE]/30 shadow-xl overflow-hidden">
         <FaucetsCardHeader />
         <FaucetsCardForm />
       </Card>

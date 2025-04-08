@@ -55,15 +55,15 @@ const FaucetsCardForm = () => {
     <div>
       <div className="px-7 w-full">
         <Select value={selectedToken} onValueChange={setSelectedToken}>
-          <SelectTrigger className="w-full bg-slate-900/90 border-slate-800 text-slate-100">
+          <SelectTrigger className="w-full bg-white border-[#01ECBE]/30 text-[#07094d]">
             <SelectValue placeholder="Select a token" />
           </SelectTrigger>
-          <SelectContent className="bg-slate-200 border-0">
+          <SelectContent className="bg-white border-[#01ECBE]/30">
             <SelectGroup>
-              <SelectLabel className="text-slate-800">Tokens</SelectLabel>
+              <SelectLabel className="text-[#07094d]">Tokens</SelectLabel>
               {TOKEN_OPTIONS.map((token) => (
                 <SelectItem
-                  className="transition-colors duration-100 cursor-pointer"
+                  className="transition-colors duration-100 cursor-pointer text-[#07094d]"
                   key={token.address}
                   value={token.address}
                 >
@@ -81,12 +81,12 @@ const FaucetsCardForm = () => {
               setAmount(value);
             }
           }}
-          className="w-full bg-slate-900/90 border-slate-800 text-slate-100 mt-5"
+          className="w-full bg-white border-[#01ECBE]/30 text-[#07094d] mt-5"
           placeholder="0.00"
         />
         <Button
           onClick={handleClaim}
-          className="w-full bg-blue-950/90 text-blue-400 border-blue-800 hover:bg-blue-800/50 cursor-pointer mt-5 transition-colors duration-300"
+          className="w-full bg-[#141beb] text-white hover:bg-[#141beb]/80 cursor-pointer mt-5 transition-colors duration-300"
         >
           {isClaiming ? "Claiming..." : "Claim"}
         </Button>
@@ -94,10 +94,10 @@ const FaucetsCardForm = () => {
 
         {/* selectedt token copy shortcut */}
         {selectedToken ? (
-          <p className="text-slate-100 text-sm mt-5">
+          <p className="text-[#07094d] text-sm mt-5">
             Add token address to your wallet:{" "}
             <button
-              className="text-blue-400 cursor-pointer hover:underline"
+              className="text-[#141beb] cursor-pointer hover:underline"
               onClick={() => {
                 navigator.clipboard.writeText(selectedToken);
                 toast.success("Token address copied to clipboard");

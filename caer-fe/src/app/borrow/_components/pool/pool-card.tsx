@@ -6,7 +6,7 @@ import PoolData from "./pool-data";
 
 const PoolCard = () => {
   return (
-    <Card className="bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700/50 shadow-xl overflow-hidden">
+    <Card className="bg-gradient-to-br from-[#0a0e9d] to-[#01ECBE] border-[#01ECBE]/20 shadow-xl overflow-hidden">
       <PoolHeader />
       <PoolData />
       <PoolFooter />

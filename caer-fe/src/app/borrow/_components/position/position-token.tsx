@@ -60,7 +60,7 @@ const PositionToken = ({
 
       <div className="flex justify-center gap-2">
         <Link href="/trade">
-          <Button className=" bg-blue-600 hover:bg-blue-700">
+          <Button className=" bg-[#01ECBE] hover:bg-[#78d0bf]">
             <ArrowRightLeft className="h-3.5 w-3.5 mr-1" />
             <span className="text-xs">Trade</span>
           </Button>

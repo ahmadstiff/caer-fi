@@ -162,7 +162,7 @@ export default function SwapPanel() {
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-4">
         <div>
-          <h2 className="text-xl font-bold text-white">Swap Token</h2>
+          <h2 className="text-xl font-bold text-[#07094d]">Swap Token</h2>
         </div>
         <div>
           <SelectPosition
@@ -174,10 +174,10 @@ export default function SwapPanel() {
       </div>
 
       {/* From Token */}
-      <div className="bg-gray-700 rounded-xl p-4">
+      <div className="bg-white border border-[#01ECBE]/20 rounded-xl p-4 shadow-sm">
         <div className="flex justify-between mb-2">
-          <label className="text-gray-400">From</label>
-          <span className="text-gray-400">
+          <label className="text-[#07094d]/80">From</label>
+          <span className="text-[#07094d]/80">
             Balance:{" "}
             {fromToken.name === "WETH"
               ? formatUnits(
@@ -191,14 +191,14 @@ export default function SwapPanel() {
         <div className="flex items-center space-x-2">
           <input
             type="number"
-            className="flex-1 bg-transparent text-white text-xl focus:outline-none"
+            className="flex-1 bg-transparent text-[#07094d] text-xl focus:outline-none"
             placeholder="0.0"
             value={fromAmount}
             onChange={(e) => setFromAmount(e.target.value)}
             aria-label="Amount to swap"
           />
           <select
-            className="bg-gray-600 text-white py-2 px-3 rounded-lg"
+            className="bg-[#141beb]/10 text-[#07094d] py-2 px-3 rounded-lg border border-[#141beb]/20"
             value={fromToken.address}
             onChange={(e) =>
               setFromToken(
@@ -221,32 +221,32 @@ export default function SwapPanel() {
       <div className="flex justify-center">
         <button
           onClick={switchTokens}
-          className="bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition"
+          className="bg-white p-2 rounded-full hover:bg-[#01ECBE]/10 border border-[#01ECBE]/20 transition"
           aria-label="Switch tokens"
         >
-          <ArrowDownIcon className="h-5 w-5 text-blue-400" />
+          <ArrowDownIcon className="h-5 w-5 text-[#141beb]" />
         </button>
       </div>
 
       {/* To Token */}
-      <div className="bg-gray-700 rounded-xl p-4">
+      <div className="bg-white border border-[#01ECBE]/20 rounded-xl p-4 shadow-sm">
         <div className="flex justify-between mb-2">
-          <label className="text-gray-400">To</label>
-          <span className="text-gray-400">
+          <label className="text-[#07094d]/80">To</label>
+          <span className="text-[#07094d]/80">
             Balance: {toTokenBalance} {toToken.name}
           </span>
         </div>
         <div className="flex items-center space-x-2">
           <input
             type="number"
-            className="flex-1 bg-transparent text-white text-xl focus:outline-none"
+            className="flex-1 bg-transparent text-[#07094d] text-xl focus:outline-none"
             placeholder="0.0"
             value={toAmount}
             readOnly
             aria-label="Amount to receive"
           />
           <select
-            className="bg-gray-600 text-white py-2 px-3 rounded-lg"
+            className="bg-white border border-[#01ECBE]/20 rounded-xl p-3 text-sm text-[#07094d]/80 shadow-sm"
             value={toToken.address}
             onChange={(e) =>
               setToToken(
@@ -266,7 +266,7 @@ export default function SwapPanel() {
       </div>
 
       {/* Swap Rate */}
-      <div className="bg-gray-700 rounded-xl p-3 text-sm text-gray-400">
+      <div className="bg-white border border-[#01ECBE]/20 rounded-xl p-3 text-sm text-[#07094d]/80 shadow-sm">
         <div className="flex justify-between">
           <span>Exchange Rate:</span>
           <span>
@@ -278,17 +278,17 @@ export default function SwapPanel() {
       </div>
 
       {/* Slippage Setting */}
-      <div className="bg-gray-700 rounded-xl p-3">
+      <div className="bg-white border border-[#01ECBE]/20 rounded-xl p-3 shadow-sm">
         <div className="flex justify-between items-center">
-          <span className="text-gray-400">Slippage Tolerance</span>
+          <span className="text-[#07094d]/80">Slippage Tolerance</span>
           <div className="flex space-x-2">
             {["0.5", "1", "2", "3"].map((value) => (
               <button
                 key={value}
                 className={`px-2 py-1 rounded text-sm ${
                   slippage === value
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-600 text-gray-300"
+                    ? "bg-[#141beb] text-white"
+                    : "bg-[#141beb]/10 text-[#07094d]"
                 }`}
                 onClick={() => setSlippage(value)}
               >
@@ -312,8 +312,8 @@ export default function SwapPanel() {
         disabled={isLoading || !fromAmount || !toAmount || !address || positionAddress === undefined}
         className={`w-full py-3 rounded-xl font-bold ${
           isLoading || !fromAmount || !toAmount || !address || positionAddress === undefined
-            ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-            : "bg-blue-500 text-white hover:bg-blue-600"
+            ? "bg-[#141beb]/30 text-white cursor-not-allowed"
+            : "bg-[#141beb] text-white hover:bg-[#141beb]/80"
         }`}
       >
         {getButtonText()}

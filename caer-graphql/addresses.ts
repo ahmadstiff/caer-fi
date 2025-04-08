@@ -1,0 +1,19 @@
+import { Address } from "viem";
+
+
+// Arbitrum Sepolia
+export const swapRouter = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
+export const mockEna = "0xBf33A1AaeBADB101D7405E333402f444A6b86Fab" as Address;
+export const mockUsde = "0x7dDB90D42C39AAaE3d79b8Ae8646873EA0Bad3e9" as Address;
+/****************************************************************************** */
+export const mockWeth = "0x67c8BD8136ae2F282399535AFfe25EB4E93338d3" as Address; //0x2c2e865b4F45A3c5540e51088a3232828C8cc7Ed (ARB) //0x18858A62e46DCb501F1c69893ee0f7F2323581a5 (EDU)
+export const mockWbtc = "0x036ecb40852891D7B1Cc6557C2737338bc9921f8" as Address; //0x8Aa245cf3ad6dc239AfaA3B7498B378354a49D56 (ARB) // 0xa0624E61a525Ba2A71B793413a89F9a624646081 (EDU)
+export const mockUsdc = "0xA1eb73cdCeEb82caC6f57c30694395Fb242d3873" as Address; //0xB55061A1c2dC4E5da0626371f3Bcd322d94aFE7a (ARB) //0x42260072BbfaD1b50AD01C8aAdeA5dE345f2E752 (EDU)
+export const mockPepe = "0xfd55B51CdAcA50aF4C921785304635317c14e4a8" as Address; //0xF2eeC8fD0eDE71006E7f423200e8615E48A73890 (ARB) // 0x6399a0cbEcB277CaCA35A907B3BA3A8079C0bE7b (EDU)
+export const lendingPool = "0xF64b9a1bbD331eB5e3Fa5c80fe9417E1A3F96F12" as Address; //0xD5Dc593d8F05390E880F594788B3993D3D643603 (ARB) // 0xF64b9a1bbD331eB5e3Fa5c80fe9417E1A3F96F12 (EDU)
+// export const lendingPoolSequencer = "0xbe3e08CE005d2707624F52744B2A33C5863e7016" as Address;
+export const factory = "0xd1a1BCe9972Ac55F5f43AA2c129572427e9161D1" as Address; //0xF9AB44f366df8A5bD236bC6c5BBBF896ebF339d1 (ARB) // 0x671f33611ca94095fD4f06d539b0F2c13e70F362 (EDU)
+export const position = "0x225F5baE8d59Ad3B6Ade2e1B536DF59696d45902" as Address; //0x3429B9830e6e0D12c5E4327E8c205783493cB167 (ARB) // 0x81aF69E69FdbF6a1dBede7CCc73eD2d72E179E9D (EDU)
+export const priceFeed = "0x1c4586f516B15A967E09859f3f638e0e2c177699" as Address; // 0x7C649479E519F41466BF783d988B6F25F61F4b06 (ARB) // 0x4a363F2dE88567623Ff351584Eb9d8B71CD1fEb8 (EDU)
+export const hxAddress = "https://testnet-explorer.riselabs.xyz/tx/" as Address;
+export const lendingPoolSequencer = "0xd418e17746f728da31508dd47a33834b8773d07c" as Address; // 0xdE8eDfdA49a2ca5Fe693e4355a1d70D49018f3C4 (ARB) // 0x9F19f49DA9D24382892a78D8d966441DCc4ee89b (EDU)

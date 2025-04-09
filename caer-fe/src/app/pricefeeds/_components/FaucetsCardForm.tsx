@@ -80,10 +80,10 @@ const FaucetsCardForm = () => {
           <SelectContent className="bg-white border-[#01ECBE]/30">
             <SelectGroup>
               <SelectLabel className="text-[#07094d]">Tokens</SelectLabel>
-              {TOKEN_OPTIONS.map((token) => (
+              {TOKEN_OPTIONS.map((token, index) => (
                 <SelectItem
                   className="transition-colors duration-100 cursor-pointer"
-                  key={token.address}
+                  key={index}
                   value={token.address}
                 >
                   {token.name}

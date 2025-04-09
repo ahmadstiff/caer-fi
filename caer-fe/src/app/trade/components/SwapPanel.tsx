@@ -202,8 +202,8 @@ export default function SwapPanel() {
             }
             aria-label="Select token to swap from"
           >
-            {TOKEN_OPTIONS.map((token) => (
-              <option key={token.address} value={token.address}>
+            {TOKEN_OPTIONS.map((token, index) => (
+              <option key={index} value={token.address}>
                 {token.name}
               </option>
             ))}
@@ -250,8 +250,8 @@ export default function SwapPanel() {
             }
             aria-label="Select token to receive"
           >
-            {TOKEN_OPTIONS.map((token) => (
-              <option key={token.address} value={token.address}>
+            {TOKEN_OPTIONS.map((token, index) => (
+              <option key={index} value={token.address}>
                 {token.name}
               </option>
             ))}

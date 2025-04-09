@@ -12,26 +12,21 @@ import {
 import { TOKEN_OPTIONS } from "@/constants/tokenOption";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-
-import { mockErc20Abi } from "@/lib/abi/mockErc20Abi";
 import {
-  useAccount,
   useReadContract,
-  useWaitForTransactionReceipt,
   useWriteContract,
 } from "wagmi";
 import { priceAbi } from "@/lib/abi/price-abi";
 import { priceFeed } from "@/constants/addresses";
 
 const FaucetsCardForm = () => {
-  const { address } = useAccount();
   const [selectedToken, setSelectedToken] = useState<string>("");
   const { isPending: isTransactionPending, writeContract: writeTransaction } =
     useWriteContract();
 
   //read price basefeed on pricefeed contract
   const { data: price } = useReadContract({
-    address: priceFeed as `0x${string}`,
+    address: priceFeed,
     abi: priceAbi,
     functionName: "tokenPrices",
     args: [selectedToken],
@@ -50,31 +45,30 @@ const FaucetsCardForm = () => {
     const tokenName = TOKEN_OPTIONS.find(
       (token) => token.address === selectedToken
     )?.namePrice;
-    try {
-      fetchData(
-        `https://min-api.cryptocompare.com/data/price?fsym=${tokenName}&tsyms=USD`
+    fetchData(
+      `https://min-api.cryptocompare.com/data/price?fsym=${tokenName}&tsyms=USD`
+    )
+      .then((data) =>
+        writeTransaction({
+          abi: priceAbi,
+          address: priceFeed,
+          functionName: "addPriceManual",
+          args: [
+            `${tokenName}/USD`,
+            selectedToken,
+            data?.USD * 10 ** 8,
+            decimal,
+          ],
+        })
       )
-        .then((data) =>
-          writeTransaction({
-            abi: priceAbi,
-            address: priceFeed as `0x${string}`,
-            functionName: "addPriceManual",
-            args: [
-              `${tokenName}/USD`,
-              selectedToken,
-              data?.USD * 10 ** 8,
-              decimal,
-            ],
-          })
-        )
-        .catch((error) => console.error("Error:", error));
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to priceFeeds");
-    } finally {
-      setSelectedToken("");
-      toast.success("PriceFeeds successfully");
-    }
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error("Failed to priceFeeds");
+      })
+      .finally(() => {
+        setSelectedToken("");
+        toast.success("PriceFeeds successfully");
+      });
   };
   return (
     <div>
@@ -109,10 +103,8 @@ const FaucetsCardForm = () => {
           Now you can see the price of the token in the price feed{" "}
           {price?.[1]
             ? Number(price[1]) /
-              10 **
-                (TOKEN_OPTIONS.find((token) => token.address === selectedToken)
-                  ?.decimals ?? 18)
-            : 0}
+              10 ** 8
+            : 0} USD
         </p>
       </div>
     </div>

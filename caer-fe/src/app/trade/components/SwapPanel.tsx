@@ -43,9 +43,9 @@ export default function SwapPanel() {
   const { swapToken, isLoading, error, setError } = useSwapToken();
 
   const { userCollateral } = useReadLendingData();
-  console.log("positionsArray", positionsArray)
+  
   const arrayLocation = positionsArray.indexOf(positionAddress as `0x${string}`);
-  console.log("arrayLocation", arrayLocation)
+  
 
   // Set mounted state to true after hydration
   useEffect(() => {

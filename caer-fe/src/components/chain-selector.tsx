@@ -27,6 +27,12 @@ export default function ChainSelector({
         ]
       : [
           {
+            id: 656476,
+            name: "Edu Chain",
+            type: "Testnet",
+            logoUrl: "/edu.png",
+          },
+          {
             id: 421614,
             name: "Arbitrum",
             type: "Testnet",
@@ -75,7 +81,10 @@ export default function ChainSelector({
           </div>
           <div className="flex items-center">
             <span className="font-medium">Filter</span>
-            <Button variant="ghost" className="ml-2 text-sm flex justify-center items-center">
+            <Button
+              variant="ghost"
+              className="ml-2 text-sm flex justify-center items-center"
+            >
               None <X className="h-4 w-4 ml-1" />
             </Button>
           </div>
@@ -119,7 +128,7 @@ export default function ChainSelector({
 
         <div className="p-4">
           <Button
-            className="w-full bg-amber-500 hover:bg-amber-600 text-black font-medium py-6"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-black font-medium py-6"
             onClick={onClose}
           >
             Continue

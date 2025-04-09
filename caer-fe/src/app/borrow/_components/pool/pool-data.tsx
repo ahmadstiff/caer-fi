@@ -1,28 +1,19 @@
 "use client";
 import Image from "next/image";
 import { useReadLendingData } from "@/hooks/read/useReadLendingData";
-import { useAccount } from "wagmi";
 import { formatUnits } from "viem";
 import BorrowDialog from "@/components/dialog/borrow/borrow-dialog";
 import { RepayDialog } from "@/components/dialog/repay-dialog";
 import SupplyDialogCol from "@/components/dialog/suppy-collateral-dialog";
 import { WithdrawDialog } from "@/components/dialog/withdraw-collateral-dialog";
 import { TOKEN_OPTIONS } from "@/constants/tokenOption";
+import { mockUsdc } from "@/constants/addresses";
 
 const PoolData = () => {
-  const { address } = useAccount();
 
   const {
     checkAvailability,
-    totalSupplyAssets,
-    totalSupplyShares,
-    collateralAddress,
-    borrowAddress,
-    userCollateral,
-    tokenBalanceByPosition,
-    totalBorrowAssets,
-    totalBorrowShares,
-    userSupply,
+
   } = useReadLendingData();
 
   const formatValue = (value: bigint | undefined, decimals = 18) => {
@@ -62,7 +53,7 @@ const PoolData = () => {
                 <Image
                   src={
                     TOKEN_OPTIONS.find(
-                      (token) => token.address === collateralAddress
+                      (token) => token.address
                     )?.logo ?? "/placeholder.svg"
                   }
                   alt="Token logo"
@@ -108,7 +99,7 @@ const PoolData = () => {
                 <Image
                   src={
                     TOKEN_OPTIONS.find(
-                      (token) => token.address === borrowAddress
+                      (token) => token.address === mockUsdc
                     )?.logo ?? "/placeholder.svg"
                   }
                   alt="USDC logo"

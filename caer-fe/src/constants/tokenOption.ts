@@ -1,6 +1,4 @@
 import { mockEna, mockUsdc, mockUsde, mockWbtc, mockWeth } from "./addresses";
-import usde from "../../public/usde.png";
-import ena from "../../public/ena.png";
 import usdc from "../../public/usdc.png";
 import weth from "../../public/weth.png";
 import wbtc from "../../public/wbtc.png";
@@ -34,6 +32,13 @@ export const TOKEN_OPTIONS: TokenOption[] = [
     namePrice: "USDC",
     address: mockUsdc,
     logo: usdc.src,
+    decimals: 6,
+  },
+  {
+    name: "USDT",
+    namePrice: "USDT",
+    address: mockUsdc,
+    logo: usdt.src,
     decimals: 6,
   },
 ];

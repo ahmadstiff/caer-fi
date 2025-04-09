@@ -140,14 +140,14 @@ const LendingData = () => {
                                 (token) => token?.name === "USDT"
                               )?.logo ?? "/placeholder.svg"
                             }
-                            alt="USDC"
+                            alt="USDT"
                             width={100}
                             height={100}
                             className="w-7 h-7 rounded-full"
                           />
                         </div>
                         <div>
-                          <div className="font-medium text-gray-700">$USDC</div>
+                          <div className="font-medium text-gray-700">$USDT</div>
                         </div>
                       </div>
                     </td>
@@ -155,8 +155,8 @@ const LendingData = () => {
                       <div>
                         <div className="font-medium">
                           <p>
-                            90,120,876,00
-                            $USDC
+                            90,100
+                            $USDT
                           </p>
                         </div>
                         <div className="text-sm text-gray-500">

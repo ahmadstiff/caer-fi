@@ -31,8 +31,9 @@ export const TextHoverEffect = ({
     <svg
       ref={svgRef}
       width="100%"
-      height="100%"
-      viewBox="0 0 300 100"
+      height="160"
+      viewBox="0 0 1200 150"
+      preserveAspectRatio="xMidYMid meet"
       xmlns="http://www.w3.org/2000/svg"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -79,45 +80,30 @@ export const TextHoverEffect = ({
           />
         </mask>
       </defs>
+      
+      {/* Base text with dark blue fill (default state) */}
+      <text
+        x="50%"
+        y="50%"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fill="#00003e"
+        strokeWidth="0"
+        className="font-[helvetica] text-8xl font-bold"
+      >
+        {text}
+      </text>
+      
+      {/* Gradient text with mask (visible on hover) */}
       <text
         x="50%"
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0"
-        className="fill-transparent stroke-[#b3b3b6] font-[helvetica] text-8xl font-bold"
-        style={{ opacity: hovered ? 1 : 0 }}
-      >
-        {text}
-      </text>
-      <motion.text
-        x="50%"
-        y="50%"
-        textAnchor="middle"
-        dominantBaseline="middle"
-        strokeWidth="1"
-        className="fill-transparent stroke-[#eaeaea3e] font-[helvetica] text-8xl font-bold"
-        initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
-        animate={{
-          strokeDashoffset: 0,
-          strokeDasharray: 1000,
-        }}
-        transition={{
-          duration: 4,
-          ease: "easeInOut",
-        }}
-      >
-        {text}
-      </motion.text>
-      <text
-        x="50%"
-        y="50%"
-        textAnchor="middle"
-        dominantBaseline="middle"
-        stroke="url(#textGradient)"
-        strokeWidth="1.2"
+        fill="url(#textGradient)"
         mask="url(#textMask)"
-        className="fill-transparent font-[helvetica] text-8xl font-bold"
+        className="font-[helvetica] text-8xl font-bold"
       >
         {text}
       </text>

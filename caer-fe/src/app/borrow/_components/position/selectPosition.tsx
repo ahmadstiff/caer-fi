@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 import { useAccount, useReadContract } from "wagmi";
 import { lendingPool } from "@/constants/addresses";
 import { poolAbi } from "@/lib/abi/poolAbi";
+
 const SelectPosition = ({
   positionAddress,
   setPositionAddress,
@@ -42,8 +43,8 @@ const SelectPosition = ({
     }
 
     if (currentPosition) {
-      setPositions(prev => [...prev, currentPosition]);
-      setCurrentIndex(prev => prev + 1);
+      setPositions((prev) => [...prev, currentPosition]);
+      setCurrentIndex((prev) => prev + 1);
     } else {
       setPositionLength(positions.length);
       setIsLoading(false);
@@ -56,30 +57,38 @@ const SelectPosition = ({
         value={positionAddress}
         onValueChange={(value) => setPositionAddress(value)}
       >
-        <SelectTrigger className="w-full bg-white border-[#01ECBE]/30 text-[#07094d]">
+        <SelectTrigger className="w-full bg-white text-gray-800 border border-gray-300 hover:border-gray-400 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm">
           <SelectValue placeholder="Select a position address" />
         </SelectTrigger>
-        <SelectContent className="bg-white border-[#01ECBE]/30">
+        <SelectContent className="bg-white border border-gray-300 rounded-lg shadow-md">
           <SelectGroup>
-            <SelectLabel className="text-[#07094d]">
+            <SelectLabel className="text-gray-700 font-semibold px-3 pt-2">
               Positions Address
             </SelectLabel>
             {(() => {
               if (isLoading) {
-                return <div className="text-[#07094d] p-2">Loading positions...</div>;
+                return (
+                  <div className="text-gray-600 px-3 py-2 text-sm">
+                    Loading positions...
+                  </div>
+                );
               }
               if (positions.length > 0) {
                 return positions.map((position, index) => (
                   <SelectItem
-                    className="transition-colors duration-100 cursor-pointer text-[#07094d]"
+                    className="cursor-pointer px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 transition-colors"
                     key={index}
                     value={position.toString()}
                   >
-                    {position}
+                    {position.toString()}
                   </SelectItem>
                 ));
               }
-              return <div className="text-[#07094d] p-2">No positions found</div>;
+              return (
+                <div className="text-gray-600 px-3 py-2 text-sm">
+                  No positions found
+                </div>
+              );
             })()}
           </SelectGroup>
         </SelectContent>

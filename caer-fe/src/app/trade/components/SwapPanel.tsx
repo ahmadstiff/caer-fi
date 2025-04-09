@@ -1,19 +1,15 @@
 "use client";
-"use client";
 
 import React, { useState, useEffect } from "react";
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
 import { TOKEN_OPTIONS, TokenOption } from "@/constants/tokenOption";
-import { useAccount, useReadContract } from "wagmi";
-import { formatUnits, parseUnits, Address } from "viem";
-import Image from "next/image";
+import { useAccount, } from "wagmi";
+import { formatUnits, Address } from "viem";
 import { usePositionBalance } from "@/hooks/useTokenBalance";
 import { useSwapToken } from "@/hooks/useSwapToken";
 import { useTokenPrice } from "@/hooks/useTokenPrice";
 import { useReadLendingData } from "@/hooks/read/useReadLendingData";
 import SelectPosition from "@/app/borrow/_components/position/selectPosition";
-import { lendingPool } from "@/constants/addresses";
-import { poolAbi } from "@/lib/abi/poolAbi";
 
 export default function SwapPanel() {
   const { address } = useAccount();
@@ -27,6 +23,7 @@ export default function SwapPanel() {
     undefined
   );
   const [positionLength, setPositionLength] = useState(0);
+  const [positionsArray, setPositionsArray] = useState<`0x${string}`[]>([]);
 
   // Use our custom hooks
   const { balance: fromTokenBalance } = usePositionBalance(
@@ -46,13 +43,9 @@ export default function SwapPanel() {
   const { swapToken, isLoading, error, setError } = useSwapToken();
 
   const { userCollateral } = useReadLendingData();
-  const { data: arrayLocation } = useReadContract({
-    address: lendingPool,
-    abi: poolAbi,
-    functionName: "addressArrayLocation",
-    args: [positionAddress],
-  });
-  console.log("positionAddress", positionAddress);
+  
+  const arrayLocation = positionsArray.indexOf(positionAddress as `0x${string}`);
+  
 
   // Set mounted state to true after hydration
   useEffect(() => {
@@ -134,7 +127,7 @@ export default function SwapPanel() {
           console.error("Swap error:", error);
         },
         positionAddress: positionAddress as Address,
-        arrayLocation: arrayLocation as bigint,
+        arrayLocation: BigInt(arrayLocation),
       });
     } catch (err) {
       console.error("Swap error:", err);
@@ -169,6 +162,7 @@ export default function SwapPanel() {
             positionAddress={positionAddress}
             setPositionAddress={handlePositionAddressChange}
             setPositionLength={setPositionLength}
+            setPositionsArray={setPositionsArray}
           />
         </div>
       </div>
@@ -309,11 +303,11 @@ export default function SwapPanel() {
       {/* Swap Button */}
       <button
         onClick={handleSwap}
-        disabled={isLoading || !fromAmount || !toAmount || !address || positionAddress === undefined}
+        disabled={isLoading || !fromAmount || !toAmount || !address || positionAddress === undefined || arrayLocation === -1}
         className={`w-full py-3 rounded-xl font-bold ${
-          isLoading || !fromAmount || !toAmount || !address || positionAddress === undefined
+          isLoading || !fromAmount || !toAmount || !address || positionAddress === undefined || arrayLocation === -1
             ? "bg-[#141beb]/30 text-white cursor-not-allowed"
-            : "bg-[#141beb] text-white hover:bg-[#141beb]/80"
+            : "bg-[#141beb] text-white hover:bg-[#141beb]/80 cursor-pointer"
         }`}
       >
         {getButtonText()}

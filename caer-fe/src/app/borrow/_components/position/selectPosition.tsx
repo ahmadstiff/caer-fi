@@ -17,13 +17,15 @@ const SelectPosition = ({
   positionAddress,
   setPositionAddress,
   setPositionLength,
+  setPositionsArray,
 }: {
   positionAddress: string | undefined;
   setPositionAddress: (address: string) => void;
   setPositionLength: (length: number) => void;
+  setPositionsArray: (positions: `0x${string}`[]) => void;
 }) => {
   const { address } = useAccount();
-  const [positions, setPositions] = useState<[any, bigint][]>([]);
+  const [positions, setPositions] = useState<`0x${string}`[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -32,7 +34,7 @@ const SelectPosition = ({
     abi: poolAbi,
     functionName: "addressPositions",
     args: [address, BigInt(currentIndex)],
-  }) as { data: [any, bigint] | undefined };
+  }) as { data: `0x${string}` | undefined };
 
   useEffect(() => {
     if (!address) {
@@ -47,6 +49,7 @@ const SelectPosition = ({
       setCurrentIndex((prev) => prev + 1);
     } else {
       setPositionLength(positions.length);
+      setPositionsArray?.(positions);
       setIsLoading(false);
     }
   }, [currentPosition, address, positions.length, setPositionLength]);

@@ -1,5 +1,4 @@
-import { Badge } from "@/components/ui/badge";
-import { Coins, HandCoins, TrendingUp } from "lucide-react";
+import { HandCoins } from "lucide-react";
 import React from "react";
 
 const PositionHeader: React.FC = () => {

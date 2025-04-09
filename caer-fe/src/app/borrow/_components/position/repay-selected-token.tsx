@@ -13,7 +13,6 @@ import { ArrowDown, CreditCard, DollarSign, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useBorrowBalance } from "@/hooks/useBorrowBalance";
-import type { Address } from "viem";
 import { useRepayLoan } from "@/hooks/useRepayLoan";
 
 const AmountInput = ({

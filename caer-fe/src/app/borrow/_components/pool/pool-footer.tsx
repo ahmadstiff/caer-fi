@@ -1,4 +1,3 @@
-import { CardFooter } from "@/components/ui/card";
 import React from "react";
 
 const PoolFooter = () => {

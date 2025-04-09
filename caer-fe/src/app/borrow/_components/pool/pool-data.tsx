@@ -25,13 +25,11 @@ const PoolData = () => {
     userSupply,
   } = useReadLendingData();
 
-  // Format values from BigInt to readable numbers
   const formatValue = (value: bigint | undefined, decimals = 18) => {
     if (!value) return "0.0000";
     return Number.parseFloat(formatUnits(value, decimals)).toFixed(4);
   };
 
-  // Format USD value
   const formatUSD = (value: bigint | undefined, decimals = 18, price = 1) => {
     if (!value) return "$0.00";
     return `$${(
@@ -47,19 +45,20 @@ const PoolData = () => {
 
   return (
     <div className="space-y-6 px-6">
+      {/* Collateral Section */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-medium text-[#c0c0ff] uppercase tracking-wider">
+          <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wider">
             COLLATERAL
           </h3>
-          <div className="text-xs bg-[#e2e2ff] border border-[#01ECBE]/20 text-[#07094d] px-2 py-0.5 rounded-full">
+          <div className="text-xs bg-gray-100 border border-gray-300 text-gray-800 px-2 py-0.5 rounded-full">
             Supplied
           </div>
         </div>
-        <div className=" rounded-xl border border-[#01ECBE]/20 overflow-hidden p-4">
+        <div className="rounded-xl border border-gray-300 bg-white overflow-hidden p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border border-[#01ECBE]/20 flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center overflow-hidden">
                 <Image
                   src={
                     TOKEN_OPTIONS.find(
@@ -72,40 +71,40 @@ const PoolData = () => {
                 />
               </div>
               <div>
-                <div className="font-semibold text-white">WETH</div>
-                <div className="text-xs text-[#c0c0ff]">Collateral Asset</div>
+                <div className="font-semibold text-gray-900">WETH</div>
+                <div className="text-xs text-gray-500">Collateral Asset</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="font-semibold text-white">
-                {/* {formatValue((userCollateral))} */}
+              <div className="font-semibold text-gray-900">
+                {/* {formatValue(userCollateral)} */}
               </div>
-              <div className="text-xs text-[#c0c0ff]">
-                {/* ≈ {formatUSD((userCollateral))} */}
+              <div className="text-xs text-gray-500">
+                {/* ≈ {formatUSD(userCollateral)} */}
               </div>
             </div>
-            <div className="flex gap-2 ">
+            <div className="flex gap-2">
               <SupplyDialogCol token="WETH" />
               <WithdrawDialog />
             </div>
           </div>
         </div>
       </div>
-  
+
       {/* Borrow Section */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-medium text-[#c0c0ff] uppercase tracking-wider">
+          <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wider">
             BORROW
           </h3>
-          <div className="text-xs border bg-[#e2e2ff] border-[#01ECBE]/20 text-[#07094d] px-2 py-0.5 rounded-full">
+          <div className="text-xs bg-gray-100 border border-gray-300 text-gray-800 px-2 py-0.5 rounded-full">
             Available
           </div>
         </div>
-        <div className="rounded-xl border border-[#01ECBE]/20 overflow-hidden p-4">
+        <div className="rounded-xl border border-gray-300 bg-white overflow-hidden p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border border-[#01ECBE]/20 flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center overflow-hidden">
                 <Image
                   src={
                     TOKEN_OPTIONS.find(
@@ -118,20 +117,20 @@ const PoolData = () => {
                 />
               </div>
               <div>
-                <div className="font-semibold text-white">USDC</div>
-                <div className="text-xs text-[#c0c0ff]">Borrow Asset</div>
+                <div className="font-semibold text-gray-900">USDC</div>
+                <div className="text-xs text-gray-500">Borrow Asset</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="font-semibold text-white">
-                {/* {formatValue(Number(tokenBalanceByPosition), 6)} */}
+              <div className="font-semibold text-gray-900">
+                {/* {formatValue(tokenBalanceByPosition, 6)} */}
               </div>
-              <div className="text-xs text-[#c0c0ff]">
-                {/* ≈ {formatUSD(Number(tokenBalanceByPosition), 6)} */}
+              <div className="text-xs text-gray-500">
+                {/* ≈ {formatUSD(tokenBalanceByPosition, 6)} */}
               </div>
             </div>
             <div className="flex gap-2">
-              <BorrowDialog token={"USDC"} />
+              <BorrowDialog token="USDC" />
               <RepayDialog />
             </div>
           </div>

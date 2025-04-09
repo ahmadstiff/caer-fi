@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSignMessage, useAccount } from "wagmi";
 import type { TransactionHandlerProps } from "@/types/type";
 import {
@@ -25,6 +25,12 @@ export default function useTransactionHandler({
     []
   );
   const [requestId, setRequestId] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  // Use refs to track already-handled states to prevent repeated effect triggers
+  const successHandled = useRef(false);
+  const errorHandled = useRef(false);
+  const onSuccessCalled = useRef(false);
 
   // Helper function to get chain emoji
   const getChainEmoji = (chainName: string) => {
@@ -54,6 +60,44 @@ export default function useTransactionHandler({
     );
   };
 
+  // Reset refs when transaction starts
+  useEffect(() => {
+    if (isProcessing) {
+      successHandled.current = false;
+      errorHandled.current = false;
+      onSuccessCalled.current = false;
+    }
+  }, [isProcessing]);
+
+  // Cleanup function when component unmounts
+  useEffect(() => {
+    return () => {
+      // Ensure we reset any callbacks if component unmounts during transaction
+      if (isProcessing) {
+        setIsProcessing(false);
+        onLoading(false);
+      }
+    };
+  }, [isProcessing, onLoading]);
+
+  // Helper to call onSuccess only once
+  const completeTransaction = () => {
+    console.log("Cross-chain transaction completing");
+    if (!onSuccessCalled.current) {
+      onSuccessCalled.current = true;
+      setIsProcessing(false);
+      onLoading(false);
+
+      // Slightly delay the onSuccess call to avoid state conflicts
+      setTimeout(() => {
+        if (onSuccess) {
+          console.log("Calling onSuccess for cross-chain transaction");
+          onSuccess();
+        }
+      }, 100);
+    }
+  };
+
   const handleTransaction = async () => {
     try {
       // Validation checks
@@ -72,7 +116,13 @@ export default function useTransactionHandler({
         return;
       }
 
+      // Reset transaction state
+      successHandled.current = false;
+      errorHandled.current = false;
+      onSuccessCalled.current = false;
+
       onLoading(true);
+      setIsProcessing(true);
 
       // Generate a unique request ID
       const newRequestId = `REQ-${Math.random()
@@ -140,9 +190,9 @@ By signing this message, you authorize CAER Finance to process this cross-chain 
 IMPORTANT: CAER Finance will never ask you to sign messages for any purpose other than transaction authorization. Always verify transaction details before signing.
 
 Ref: CF-${timestamp.substring(0, 10)}-${Math.random()
-        .toString(36)
-        .substring(2, 8)
-        .toUpperCase()}
+          .toString(36)
+          .substring(2, 8)
+          .toUpperCase()}
 `;
 
       // Update first step to loading
@@ -179,6 +229,7 @@ Ref: CF-${timestamp.substring(0, 10)}-${Math.random()
       if (data.success) {
         // Format transaction hash for display
         const txHash = data.data?.transactionHash || "";
+        console.log("txhash: ", txHash);
 
         // Update remaining steps
         updateStepStatus("finality", "completed");
@@ -191,38 +242,67 @@ Ref: CF-${timestamp.substring(0, 10)}-${Math.random()
 
           // Simulate waiting for final confirmation
           setTimeout(() => {
-            updateStepStatus("final", "completed");
-            onSuccess();
+            if (!successHandled.current) {
+              successHandled.current = true;
+              updateStepStatus("final", "completed");
+
+              // Display success message and clean up
+              toast.success(`Successfully borrowed ${amount} ${token} from ${fromChain.name} to ${toChain.name}`);
+
+              // Close the modal after success with delay
+              setTimeout(() => {
+                setIsModalOpen(false);
+
+                // Complete the transaction after modal closes
+                setTimeout(() => {
+                  completeTransaction();
+                }, 500);
+              }, 2000);
+            }
           }, 2000);
         }, 3000);
       } else {
         // Handle error
-        updateStepStatus("finality", "error");
-        throw new Error(data.message || "Transaction failed");
+        if (!errorHandled.current) {
+          errorHandled.current = true;
+          updateStepStatus("finality", "error");
+          toast.error(`Transaction failed: ${data.message || "Unknown error"}`);
+          setIsProcessing(false);
+          onLoading(false);
+        }
       }
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Unknown error";
+      if (!errorHandled.current) {
+        errorHandled.current = true;
+        const errorMessage =
+          error instanceof Error ? error.message : "Unknown error";
 
-      // Update steps to show error
-      setTransactionSteps((prev) =>
-        prev.map((step) =>
-          step.status === "loading" ? { ...step, status: "error" } : step
-        )
-      );
+        // Update steps to show error
+        setTransactionSteps((prev) =>
+          prev.map((step) =>
+            step.status === "loading" ? { ...step, status: "error" } : step
+          )
+        );
 
-      console.error("Transaction failed:", errorMessage);
-    } finally {
-      onLoading(false);
+        console.error("Transaction failed:", errorMessage);
+        toast.error(`Transaction failed: ${errorMessage}`);
+        setIsProcessing(false);
+        onLoading(false);
+      }
     }
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    if (!isProcessing) {
+      setIsModalOpen(false);
+    } else {
+      toast.warning("Please wait for the transaction to complete");
+    }
   };
 
   return {
     handleTransaction,
+    isProcessing,
     TransactionProgress: (
       <TransactionProgressModal
         isOpen={isModalOpen}

@@ -34,7 +34,7 @@ const PositionCard = () => {
     undefined
   );
   const [positionLength, setPositionLength] = useState<number>(0);
-
+const [positionsArray, setPositionsArray] = useState<`0x${string}`[]>([]);
   const { collateralAddress, borrowAddress, userCollateral } =
     useReadLendingData();
 
@@ -76,6 +76,7 @@ const PositionCard = () => {
                     positionAddress={positionAddress}
                     setPositionAddress={setPositionAddress}
                     setPositionLength={setPositionLength}
+                    setPositionsArray={setPositionsArray}
                   />
                 </div>
                 <div>

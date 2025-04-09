@@ -43,9 +43,8 @@ export default function SwapPanel() {
   const { swapToken, isLoading, error, setError } = useSwapToken();
 
   const { userCollateral } = useReadLendingData();
-  
+
   const arrayLocation = positionsArray.indexOf(positionAddress as `0x${string}`);
-  
 
   // Set mounted state to true after hydration
   useEffect(() => {
@@ -152,12 +151,12 @@ export default function SwapPanel() {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center mb-4">
+    <div className="max-w-md mx-auto w-full px-4 py-2">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
         <div>
           <h2 className="text-xl font-bold text-[#07094d]">Swap Token</h2>
         </div>
-        <div>
+        <div className="w-full sm:w-auto">
           <SelectPosition
             positionAddress={positionAddress}
             setPositionAddress={handlePositionAddressChange}
@@ -167,151 +166,151 @@ export default function SwapPanel() {
         </div>
       </div>
 
-      {/* From Token */}
-      <div className="bg-white border border-[#01ECBE]/20 rounded-xl p-4 shadow-sm">
-        <div className="flex justify-between mb-2">
-          <label className="text-[#07094d]/80">From</label>
-          <span className="text-[#07094d]/80">
-            Balance:{" "}
-            {fromToken.name === "WETH"
-              ? formatUnits(
+      <div className="space-y-4">
+        {/* From Token */}
+        <div className="bg-white border border-[#01ECBE]/30 rounded-xl p-4 shadow-sm">
+          <div className="flex justify-between mb-2">
+            <label className="text-[#07094d]/80 font-medium">From</label>
+            <span className="text-[#07094d]/80 text-sm truncate">
+              Balance:{" "}
+              {fromToken.name === "WETH"
+                ? formatUnits(
                   BigInt(userCollateral?.toString() ?? "0"),
                   fromToken.decimals
                 )
-              : fromTokenBalance}{" "}
-            {fromToken.name}
-          </span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <input
-            type="number"
-            className="flex-1 bg-transparent text-[#07094d] text-xl focus:outline-none"
-            placeholder="0.0"
-            value={fromAmount}
-            onChange={(e) => setFromAmount(e.target.value)}
-            aria-label="Amount to swap"
-          />
-          <select
-            className="bg-[#141beb]/10 text-[#07094d] py-2 px-3 rounded-lg border border-[#141beb]/20"
-            value={fromToken.address}
-            onChange={(e) =>
-              setFromToken(
-                TOKEN_OPTIONS.find((t) => t.address === e.target.value) ||
+                : fromTokenBalance}{" "}
+              {fromToken.name}
+            </span>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <input
+              type="number"
+              className="w-full bg-transparent text-[#07094d] text-xl focus:outline-none p-2 border-b border-[#01ECBE]/30"
+              placeholder="0.0"
+              value={fromAmount}
+              onChange={(e) => setFromAmount(e.target.value)}
+              aria-label="Amount to swap"
+            />
+            <select
+              className="bg-[#141beb]/10 text-[#07094d] py-2 px-3 rounded-lg border border-[#141beb]/20"
+              value={fromToken.address}
+              onChange={(e) =>
+                setFromToken(
+                  TOKEN_OPTIONS.find((t) => t.address === e.target.value) ||
                   TOKEN_OPTIONS[0]
-              )
-            }
-            aria-label="Select token to swap from"
-          >
-            {TOKEN_OPTIONS.map((token, index) => (
-              <option key={index} value={token.address}>
-                {token.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* Switch button */}
-      <div className="flex justify-center">
-        <button
-          onClick={switchTokens}
-          className="bg-white p-2 rounded-full hover:bg-[#01ECBE]/10 border border-[#01ECBE]/20 transition"
-          aria-label="Switch tokens"
-        >
-          <ArrowDownIcon className="h-5 w-5 text-[#141beb]" />
-        </button>
-      </div>
-
-      {/* To Token */}
-      <div className="bg-white border border-[#01ECBE]/20 rounded-xl p-4 shadow-sm">
-        <div className="flex justify-between mb-2">
-          <label className="text-[#07094d]/80">To</label>
-          <span className="text-[#07094d]/80">
-            Balance: {toTokenBalance} {toToken.name}
-          </span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <input
-            type="number"
-            className="flex-1 bg-transparent text-[#07094d] text-xl focus:outline-none"
-            placeholder="0.0"
-            value={toAmount}
-            readOnly
-            aria-label="Amount to receive"
-          />
-          <select
-            className="bg-white border border-[#01ECBE]/20 rounded-xl p-3 text-sm text-[#07094d]/80 shadow-sm"
-            value={toToken.address}
-            onChange={(e) =>
-              setToToken(
-                TOKEN_OPTIONS.find((t) => t.address === e.target.value) ||
-                  TOKEN_OPTIONS[1]
-              )
-            }
-            aria-label="Select token to receive"
-          >
-            {TOKEN_OPTIONS.map((token, index) => (
-              <option key={index} value={token.address}>
-                {token.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* Swap Rate */}
-      <div className="bg-white border border-[#01ECBE]/20 rounded-xl p-3 text-sm text-[#07094d]/80 shadow-sm">
-        <div className="flex justify-between">
-          <span>Exchange Rate:</span>
-          <span>
-            {price
-              ? `1 ${fromToken.name} ≈ ${price.toFixed(6)} ${toToken.name}`
-              : "Loading..."}
-          </span>
-        </div>
-      </div>
-
-      {/* Slippage Setting */}
-      <div className="bg-white border border-[#01ECBE]/20 rounded-xl p-3 shadow-sm">
-        <div className="flex justify-between items-center">
-          <span className="text-[#07094d]/80">Slippage Tolerance</span>
-          <div className="flex space-x-2">
-            {["0.5", "1", "2", "3"].map((value) => (
-              <button
-                key={value}
-                className={`px-2 py-1 rounded text-sm ${
-                  slippage === value
-                    ? "bg-[#141beb] text-white"
-                    : "bg-[#141beb]/10 text-[#07094d]"
-                }`}
-                onClick={() => setSlippage(value)}
-              >
-                {value}%
-              </button>
-            ))}
+                )
+              }
+              aria-label="Select token to swap from"
+            >
+              {TOKEN_OPTIONS.map((token, index) => (
+                <option key={index} value={token.address}>
+                  {token.name}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
-      </div>
 
-      {/* Error Message */}
-      {error && (
-        <div className="text-red-500 text-sm bg-red-900/30 p-2 rounded">
-          {error}
+        {/* Switch button */}
+        <div className="flex justify-center -my-2">
+          <button
+            onClick={switchTokens}
+            className="bg-white p-2 rounded-full hover:bg-[#01ECBE]/20 border border-[#01ECBE]/30 transition-colors z-10"
+            aria-label="Switch tokens"
+          >
+            <ArrowDownIcon className="h-5 w-5 text-[#141beb]" />
+          </button>
         </div>
-      )}
 
-      {/* Swap Button */}
-      <button
-        onClick={handleSwap}
-        disabled={isLoading || !fromAmount || !toAmount || !address || positionAddress === undefined || arrayLocation === -1}
-        className={`w-full py-3 rounded-xl font-bold ${
-          isLoading || !fromAmount || !toAmount || !address || positionAddress === undefined || arrayLocation === -1
+        {/* To Token */}
+        <div className="bg-white border border-[#01ECBE]/30 rounded-xl p-4 shadow-sm">
+          <div className="flex justify-between mb-2">
+            <label className="text-[#07094d]/80 font-medium">To</label>
+            <span className="text-[#07094d]/80 text-sm truncate">
+              Balance: {toTokenBalance} {toToken.name}
+            </span>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <input
+              type="number"
+              className="w-full bg-transparent text-[#07094d] text-xl focus:outline-none p-2 border-b border-[#01ECBE]/30"
+              placeholder="0.0"
+              value={toAmount}
+              readOnly
+              aria-label="Amount to receive"
+            />
+            <select
+              className="bg-[#141beb]/10 text-[#07094d] py-2 px-3 rounded-lg border border-[#141beb]/20"
+              value={toToken.address}
+              onChange={(e) =>
+                setToToken(
+                  TOKEN_OPTIONS.find((t) => t.address === e.target.value) ||
+                  TOKEN_OPTIONS[1]
+                )
+              }
+              aria-label="Select token to receive"
+            >
+              {TOKEN_OPTIONS.map((token, index) => (
+                <option key={index} value={token.address}>
+                  {token.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Swap Rate */}
+        <div className="bg-white border border-[#01ECBE]/30 rounded-xl p-3 text-sm text-[#07094d]/80 shadow-sm">
+          <div className="flex justify-between">
+            <span>Exchange Rate:</span>
+            <span className="truncate">
+              {price
+                ? `1 ${fromToken.name} ≈ ${price.toFixed(6)} ${toToken.name}`
+                : "Loading..."}
+            </span>
+          </div>
+        </div>
+
+        {/* Slippage Setting */}
+        <div className="bg-white border border-[#01ECBE]/30 rounded-xl p-3 shadow-sm">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <span className="text-[#07094d]/80 font-medium">Slippage Tolerance</span>
+            <div className="flex flex-wrap gap-1">
+              {["0.5", "1", "2", "3"].map((value) => (
+                <button
+                  key={value}
+                  className={`px-3 py-1 rounded text-sm ${slippage === value
+                    ? "bg-[#141beb] text-white"
+                    : "bg-[#141beb]/10 text-[#07094d] hover:bg-[#141beb]/20"
+                    }`}
+                  onClick={() => setSlippage(value)}
+                >
+                  {value}%
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="text-red-500 text-sm bg-red-100 p-3 rounded-lg border border-red-200">
+            {error}
+          </div>
+        )}
+
+        {/* Swap Button */}
+        <button
+          onClick={handleSwap}
+          disabled={isLoading || !fromAmount || !toAmount || !address || positionAddress === undefined || arrayLocation === -1}
+          className={`w-full py-3.5 rounded-xl font-bold transition-colors ${isLoading || !fromAmount || !toAmount || !address || positionAddress === undefined || arrayLocation === -1
             ? "bg-[#141beb]/30 text-white cursor-not-allowed"
-            : "bg-[#141beb] text-white hover:bg-[#141beb]/80 cursor-pointer"
-        }`}
-      >
-        {getButtonText()}
-      </button>
+            : "bg-[#141beb] text-white hover:bg-[#141beb]/90 cursor-pointer shadow-md hover:shadow-lg"
+            }`}
+        >
+          {getButtonText()}
+        </button>
+      </div>
     </div>
   );
 }

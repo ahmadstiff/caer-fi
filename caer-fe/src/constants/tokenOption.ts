@@ -36,25 +36,4 @@ export const TOKEN_OPTIONS: TokenOption[] = [
     logo: usdc.src,
     decimals: 6,
   },
-  {
-    name: "ENA",
-    namePrice: "ENA",
-    address: mockEna,
-    logo: ena.src,
-    decimals: 18,
-  },
-  {
-    name: "USDe",
-    namePrice: "USDe",
-    address: mockUsde,
-    logo: usde.src,
-    decimals: 18,
-  },
-  {
-    name: "USDT",
-    namePrice: "USDT",
-    address: mockUsde,
-    logo: usdt.src,
-    decimals: 6,
-  },
 ];

@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 ">
+    <nav className="fixed top-0 left-0 right-0 z-50">
       <div className="absolute inset-0 backdrop-blur-md" />
       <div className="relative flex items-center justify-between h-16 px-4 md:px-16 max-w-9xl mx-auto">
         <div className="flex items-center space-x-8">
@@ -59,7 +59,9 @@ const Navbar: React.FC = () => {
           <ButtonConnectWallet />
         </div>
 
-        <MobileMenuButton isOpen={isOpen} onClick={toggleMenu} />
+        <div className="flex md:hidden">
+          <MobileMenuButton isOpen={isOpen} onClick={toggleMenu} />
+        </div>
         <MobileMenu isOpen={isOpen} onClose={closeMenu} />
       </div>
     </nav>

@@ -15,11 +15,11 @@ const MobileMenuButton: React.FC<MobileMenuButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className="md:hidden p-2 text-gray-200 hover:text-white transition-colors"
+      className="p-2 text-gray-600  hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
       aria-label="Toggle menu"
       type="button"
     >
-      {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-4 h-4" />}
+      {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
     </button>
   );
 };

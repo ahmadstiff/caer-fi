@@ -10,6 +10,7 @@ import { config } from "@/lib/wagmi";
 import Navbar from "@/components/navbar";
 import { Toaster } from "sonner";
 import Providers from "./Providers";
+import Head from "next/head";
 
 // Initialize fonts
 const geistSans = Geist({
@@ -32,6 +33,10 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
 
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/caer.png" />
+        <title>CAER Finance</title>
+      </head>
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased min-h-screen bg-[#bdcde4] dark:bg-[#bdcde4]`}

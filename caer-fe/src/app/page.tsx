@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import SplashCursor from '@/components/ui/SplashCursor'
 
 
-
 export default function Home() {
   const words = [
     {
@@ -55,7 +54,7 @@ export default function Home() {
             className="border-[#01ECBE] bg-[#ffffff2e] text-[#07094d] hover:bg-[#01ECBE]/10 px-8 py-6 text-lg rounded-md cursor-pointer"
             asChild
           >
-            <a href="https://caer.gitbook.io/caer" target="_blank" rel="noopener noreferrer">View Docs</a>
+            <a href="https://caer-finance.gitbook.io/caer-finance/" target="_blank" rel="noopener noreferrer">View Docs</a>
           </Button>
         </div>
       </div>

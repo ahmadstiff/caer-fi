@@ -56,7 +56,7 @@ const AmountInput = ({
             Position Balance: {balance} ${token}
           </span>
           <button
-            className="text-xs p-1 text-emerald-700 border border-emerald-700 rounded-md hover:bg-emerald-100"
+            className="text-xs p-1 text-emerald-700 border border-emerald-700 rounded-md hover:bg-emerald-100 cursor-pointer"
             onClick={() => onChange(borrowBalance)}
           >
             max
@@ -85,7 +85,7 @@ export const RepaySelectedToken = (props: any) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 rounded-lg">
+        <Button className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 rounded-lg cursor-pointer">
           <ArrowDown className="mr-2 h-4 w-4" /> Repay
         </Button>
       </DialogTrigger>
@@ -135,7 +135,7 @@ export const RepaySelectedToken = (props: any) => {
             disabled={
               isPending || !valueAmount || Number.parseFloat(valueAmount) <= 0
             }
-            className={`w-full h-12 text-base font-medium rounded-lg ${
+            className={`w-full h-12 text-base font-medium rounded-lg cursor-pointer ${
               isPending
                 ? "bg-gray-200 text-gray-500"
                 : "bg-emerald-500 hover:bg-emerald-600 text-white shadow-md hover:shadow-lg"

@@ -36,7 +36,7 @@ export default function RecipientInput({
         />
         <Button
           variant="outline"
-          className="rounded-l-none border-l-0 text-blue-500 font-medium"
+          className="rounded-l-none border-l-0 text-blue-500 font-medium cursor-pointer"
           onClick={handleSelfAddress}
         >
           Self

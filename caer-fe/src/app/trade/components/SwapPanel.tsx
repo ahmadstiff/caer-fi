@@ -152,18 +152,14 @@ export default function SwapPanel() {
 
   return (
     <div className="max-w-md mx-auto w-full px-4 py-2">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
-        <div>
-          <h2 className="text-xl font-bold text-[#07094d]">Swap Token</h2>
-        </div>
-        <div className="w-full sm:w-auto">
-          <SelectPosition
-            positionAddress={positionAddress}
-            setPositionAddress={handlePositionAddressChange}
-            setPositionLength={setPositionLength}
-            setPositionsArray={setPositionsArray}
-          />
-        </div>
+      <h2 className="text-2xl font-bold text-center text-[#07094d] mb-6">Swap Token</h2>
+      <div className="w-full mb-4">
+        <SelectPosition
+          positionAddress={positionAddress}
+          setPositionAddress={handlePositionAddressChange}
+          setPositionLength={setPositionLength}
+          setPositionsArray={setPositionsArray}
+        />
       </div>
 
       <div className="space-y-4">
@@ -215,7 +211,7 @@ export default function SwapPanel() {
         <div className="flex justify-center -my-2">
           <button
             onClick={switchTokens}
-            className="bg-white p-2 rounded-full hover:bg-[#01ECBE]/20 border border-[#01ECBE]/30 transition-colors z-10"
+            className="bg-white p-2 rounded-full hover:bg-[#01ECBE]/20 border border-[#01ECBE]/30 transition-colors z-10 cursor-pointer"
             aria-label="Switch tokens"
           >
             <ArrowDownIcon className="h-5 w-5 text-[#141beb]" />
@@ -281,7 +277,7 @@ export default function SwapPanel() {
                   key={value}
                   className={`px-3 py-1 rounded text-sm ${slippage === value
                     ? "bg-[#141beb] text-white"
-                    : "bg-[#141beb]/10 text-[#07094d] hover:bg-[#141beb]/20"
+                    : "bg-[#141beb]/10 text-[#07094d] hover:bg-[#141beb]/20 cursor-pointer"
                     }`}
                   onClick={() => setSlippage(value)}
                 >
@@ -305,7 +301,7 @@ export default function SwapPanel() {
           disabled={isLoading || !fromAmount || !toAmount || !address || positionAddress === undefined || arrayLocation === -1}
           className={`w-full py-3.5 rounded-xl font-bold transition-colors ${isLoading || !fromAmount || !toAmount || !address || positionAddress === undefined || arrayLocation === -1
             ? "bg-[#141beb]/30 text-white cursor-not-allowed"
-            : "bg-[#141beb] text-white hover:bg-[#141beb]/90 cursor-pointer shadow-md hover:shadow-lg"
+            : "bg-[#141beb] text-white hover:bg-[#141beb]/90 cursor-pointer shadow-md hover:shadow-lg "
             }`}
         >
           {getButtonText()}

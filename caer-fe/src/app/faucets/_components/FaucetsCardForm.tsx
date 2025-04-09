@@ -97,7 +97,7 @@ const FaucetsCardForm = () => {
           <p className="text-[#07094d] text-sm mt-5">
             Add token address to your wallet:{" "}
             <button
-              className="text-[#141beb] cursor-pointer hover:underline"
+              className="text-[#141beb] cursor-pointer hover:underline "
               onClick={() => {
                 navigator.clipboard.writeText(selectedToken);
                 toast.success("Token address copied to clipboard");

@@ -75,7 +75,7 @@ export default function ChainSelector({
         <div className="p-4 border-b flex items-center justify-between">
           <div className="flex items-center">
             <span className="font-medium">Sort</span>
-            <Button variant="ghost" className="ml-2 text-sm">
+            <Button variant="ghost" className="ml-2 text-sm cursor-pointer">
               Routes From Edu Chain <ChevronDown className="h-4 w-4 ml-1" />
             </Button>
           </div>
@@ -94,7 +94,7 @@ export default function ChainSelector({
           {filteredChains.map((chain) => (
             <button
               key={chain.id}
-              className="w-full p-4 flex items-center justify-between hover:bg-gray-50 border-b"
+              className="w-full p-4 flex items-center justify-between hover:bg-gray-50 border-b cursor-pointer"
               onClick={() => onSelect(chain)}
             >
               <div className="flex items-center">
@@ -128,7 +128,7 @@ export default function ChainSelector({
 
         <div className="p-4">
           <Button
-            className="w-full bg-blue-500 hover:bg-blue-600 text-black font-medium py-6"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-black font-medium py-6 cursor-pointer"
             onClick={onClose}
           >
             Continue

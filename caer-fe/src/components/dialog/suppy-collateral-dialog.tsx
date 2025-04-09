@@ -29,7 +29,7 @@ export default function SupplyDialogCol({ token }: SupplyDialogProps) {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="bg-[#141beb] hover:bg-blue-700 text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg"
+          className="bg-[#141beb] hover:bg-blue-700 text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg cursor-pointer"
           size="lg"
         >
           Supply {token}
@@ -84,7 +84,7 @@ export default function SupplyDialogCol({ token }: SupplyDialogProps) {
                   </span>
                   <button
                     onClick={() => setAmount(wethBalance)}
-                    className="text-xs p-0.5 border border-purple-500 rounded-md text-purple-500 hover:bg-purple-200"
+                    className="text-xs p-0.5 border border-purple-500 rounded-md text-purple-500 hover:bg-purple-200 cursor-pointer"
                   >
                     Max
                   </button>
@@ -101,7 +101,7 @@ export default function SupplyDialogCol({ token }: SupplyDialogProps) {
             className={`w-full h-12 text-base font-medium rounded-lg ${
               isProcessing
                 ? "bg-slate-200 text-slate-500"
-                : "bg-gradient-to-r from-[#01ECBE] to-[#141beb] hover:from-[#141beb] hover:to-[#01ECBE] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg"
+                : "bg-gradient-to-r from-[#01ECBE] to-[#141beb] hover:from-[#141beb] hover:to-[#01ECBE] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg cursor-pointer"
             }`}
           >
             {isProcessing ? (

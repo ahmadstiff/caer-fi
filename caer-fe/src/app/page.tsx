@@ -43,7 +43,7 @@ export default function Home() {
           <Button
             variant="outline"
             size="lg"
-            className="bg-[#141beb] hover:bg-[#07F2BE] text-white px-8 py-6 text-md rounded-md"
+            className="bg-[#141beb] hover:bg-[#07F2BE] text-white px-8 py-6 text-md rounded-md cursor-pointer"
             asChild
           >
             <a href="/lending">Start Lending</a>
@@ -52,7 +52,7 @@ export default function Home() {
           <Button
             variant="outline"
             size="lg"
-            className="border-[#01ECBE] bg-[#ffffff2e] text-[#07094d] hover:bg-[#01ECBE]/10 px-8 py-6 text-lg rounded-md"
+            className="border-[#01ECBE] bg-[#ffffff2e] text-[#07094d] hover:bg-[#01ECBE]/10 px-8 py-6 text-lg rounded-md cursor-pointer"
             asChild
           >
             <a href="https://caer.gitbook.io/caer" target="_blank" rel="noopener noreferrer">View Docs</a>

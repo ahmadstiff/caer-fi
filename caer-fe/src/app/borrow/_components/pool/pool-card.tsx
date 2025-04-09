@@ -6,7 +6,7 @@ import PoolData from "./pool-data";
 
 const PoolCard = () => {
   return (
-    <Card className="bg-[#F0F2FF] shadow-xl border border-[#1016BC] overflow-hidden">
+    <Card className="bg-[#F0F2FF] shadow-xl border overflow-hidden">
       <PoolHeader />
       <PoolData />
       <PoolFooter />

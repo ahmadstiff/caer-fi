@@ -93,7 +93,7 @@ const AmountInput = ({
             </span>
           </div>
           <button
-            className="text-xs p-1 text-purple-700 border border-purple-700 rounded-md hover:bg-purple-400"
+            className="text-xs p-1 text-purple-700 border border-purple-700 rounded-md hover:bg-purple-400 cursor-pointer"
             onClick={() => onChange(collateralBalance)}
           >
             max
@@ -141,7 +141,7 @@ export const WithdrawDialog = () => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="bg-[#141beb] hover:bg-blue-700 text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg border-0"
+          className="bg-[#141beb] hover:bg-blue-700 text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg border-0 cursor-pointer"
           size="lg"
         >
           <ArrowUpRight className="mr-2 h-5 w-5" /> Withdraw
@@ -193,7 +193,7 @@ export const WithdrawDialog = () => {
             className={`w-full h-12 text-base font-medium rounded-lg ${
               isPending
                 ? "bg-slate-200 text-slate-500"
-                : "bg-gradient-to-r from-[#01ECBE] to-[#141beb] hover:from-[#141beb] hover:to-[#01ECBE] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg"
+                : "bg-gradient-to-r from-[#01ECBE] to-[#141beb] hover:from-[#141beb] hover:to-[#01ECBE] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg cursor-pointer"
             }`}
           >
             {isPending ? (

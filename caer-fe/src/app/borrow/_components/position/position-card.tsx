@@ -63,8 +63,8 @@ const [positionsArray, setPositionsArray] = useState<`0x${string}`[]>([]);
   };
 
   return (
-    <Card className="bg-white border border-blue-100 shadow-sm overflow-hidden">
-      <CardHeader className="pb-2 border-b py-2 border-blue-100">
+    <Card className="bg-white border shadow-sm overflow-hidden">
+      <CardHeader className="pb-2 border-b py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 py-2">
             <CircleDollarSign className="h-5 w-5 text-blue-600" />
@@ -107,7 +107,7 @@ const [positionsArray, setPositionsArray] = useState<`0x${string}`[]>([]);
             variant="ghost"
             size="sm"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-white bg-blue-600 hover:bg-blue-700 transform transition-all duration-200"
+            className="text-white bg-emerald-500 hover:bg-emerald-600 hover:text-white transform transition-all duration-200 cursor-pointer"
           >
             {isExpanded ? (
               <ChevronUp className="h-4 w-4" />
@@ -183,7 +183,7 @@ const [positionsArray, setPositionsArray] = useState<`0x${string}`[]>([]);
                           : "Select a position address to view your position."}
                       </p>
                       {positionLength === 0 && (
-                        <Button className="mt-2 bg-emerald-500 hover:bg-emerald-600 text-white">
+                        <Button className="mt-2 bg-emerald-500 hover:bg-emerald-600 text-white cursor-pointer">
                           Create Position
                         </Button>
                       )}

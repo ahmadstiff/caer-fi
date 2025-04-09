@@ -107,10 +107,10 @@ const DialogSupply = () => {
             <Button
               onClick={() => supply(amount)}
               disabled={isButtonDisabled}
-              className={`w-full h-12 text-base font-medium rounded-lg ${
+              className={`w-full h-12 text-base font-medium rounded-lg  ${
                 isButtonDisabled
                   ? "bg-slate-200 text-slate-500 cursor-not-allowed"
-                  : "bg-gradient-to-r from-blue-500 to-indigo-400 hover:from-blue-600 hover:to-indigo-500 text-white shadow-md hover:shadow-lg"
+                  : "bg-gradient-to-r from-blue-500 to-indigo-400 hover:from-blue-600 hover:to-indigo-500 text-white shadow-md hover:shadow-lg cursor-pointer"
               }`}
             >
               {isTransactionPending ? (

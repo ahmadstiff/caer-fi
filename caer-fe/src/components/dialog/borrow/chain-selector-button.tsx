@@ -50,7 +50,7 @@ export default function ChainSelectorButton({
         <div className="w-[45%]">
           <p className="text-sm text-gray-600 mb-2">From</p>
           <button
-            className="w-full flex items-center border rounded-lg p-3 bg-white"
+            className="w-full flex items-center border rounded-lg p-3 bg-white cursor-pointer"
             disabled
           >
             <Image
@@ -65,7 +65,7 @@ export default function ChainSelectorButton({
         </div>
         <div className="flex items-center justify-center">
           <button
-            className="bg-gray-100 p-2 rounded-full mt-7 hover:bg-gray-200 transition-colors"
+            className="bg-gray-100 p-2 rounded-full mt-7 hover:bg-gray-200 transition-colors cursor-pointer"
             onClick={handleSwapChains}
             aria-label="Swap chains"
           >
@@ -75,7 +75,7 @@ export default function ChainSelectorButton({
         <div className="w-[45%]">
           <p className="text-sm text-gray-600 mb-2">To</p>
           <button
-            className="w-full flex items-center justify-between border rounded-lg p-3 bg-white hover:bg-gray-50 transition-colors"
+            className="w-full flex items-center justify-between border rounded-lg p-3 bg-white hover:bg-gray-50 transition-colors cursor-pointer"
             onClick={() => handleOpenChainSelector("to")}
           >
             <div className="flex items-center">

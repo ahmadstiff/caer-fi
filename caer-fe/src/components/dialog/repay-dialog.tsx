@@ -53,7 +53,7 @@ const AmountInput = ({ value, onChange, token, label }: any) => {
           <div className="flex items-center text-xs gap-2">
             <span>{userBorrow ? Number(userBorrow) / 1e6 : "0.00"} $USDC</span>
             <button
-              className="text-xs p-0.5 text-blue-500 rounded-md border border-blue-500 hover:bg-blue-300"
+              className="text-xs p-0.5 text-blue-500 rounded-md border border-blue-500 hover:bg-blue-300 cursor-pointer"
               onClick={() =>
                 onChange(userBorrow ? Number(userBorrow) / 1e6 : "0.00")
               }
@@ -127,7 +127,7 @@ export const RepayDialog = () => {
     <Dialog open={isOpen || isPending} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="bg-[#141beb] hover:bg-blue-700 text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg border-0"
+          className="bg-[#141beb] hover:bg-blue-700 text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg border-0 cursor-pointer"
           size="lg"
         >
           Repay $USDC
@@ -173,7 +173,7 @@ export const RepayDialog = () => {
           <Button
             onClick={handleApproveAndRepay}
             disabled={isPending || !usdcAmount || Number(usdcAmount) <= 0}
-            className="w-full h-12 text-base font-medium rounded-lg"
+            className="w-full h-12 text-base font-medium rounded-lg cursor-pointer"
           >
             {isPending ? (
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />

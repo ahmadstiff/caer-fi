@@ -7,6 +7,7 @@ import {
   TransactionProgressModal,
   type TransactionStep,
 } from "@/components/transaction-progress";
+import { toast } from "sonner";
 
 export default function useTransactionHandler({
   amount,
@@ -57,17 +58,17 @@ export default function useTransactionHandler({
     try {
       // Validation checks
       if (!amount || Number.parseFloat(amount) <= 0) {
-        alert("Please enter a valid amount to borrow.");
+        toast.error("Please enter a valid amount to borrow.");
         return;
       }
 
       if (!recipientAddress) {
-        alert("Please specify a recipient address.");
+        toast.error("Please specify a recipient address.");
         return;
       }
 
       if (!address) {
-        alert("Please connect your wallet before proceeding.");
+        toast.error("Please connect your wallet before proceeding.");
         return;
       }
 

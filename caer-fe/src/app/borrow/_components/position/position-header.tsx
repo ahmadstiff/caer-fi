@@ -12,22 +12,6 @@ const PositionHeader: React.FC = () => {
       <p className="text-slate-400 text-sm md:text-base">
         The Best DeFi Yields In 1-Click
       </p>
-      <div className="flex justify-center gap-2">
-        <Badge
-          variant="outline"
-          className="bg-blue-950/30 text-blue-400 border-blue-800 px-3 py-1"
-        >
-          <TrendingUp className="h-3.5 w-3.5 mr-1" />
-          High Yields
-        </Badge>
-        <Badge
-          variant="outline"
-          className="bg-emerald-950/30 text-emerald-400 border-emerald-800 px-3 py-1"
-        >
-          <Coins className="h-3.5 w-3.5 mr-1" />
-          Multiple Assets
-        </Badge>
-      </div>
     </div>
   );
 };

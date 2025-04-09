@@ -46,11 +46,7 @@ const PositionToken = ({
       : convertRealAmount(tokenBalanceUSDC as bigint, decimal).toFixed(2);
 
   return (
-<<<<<<< HEAD
     <div className="grid grid-cols-3 gap-2 p-3 items-center hover:bg-blue-300/20 transition-colors">
-=======
-    <div className="grid grid-cols-3 gap-2 p-3 items-center hover:bg-slate-100 transition-colors">
->>>>>>> c6b875e69ae144be0a78f1d418a3b001f8b89b93
       <div className="flex items-center gap-2 pl-2">
         <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">
           {name?.charAt(0)}

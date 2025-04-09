@@ -33,7 +33,7 @@ const AmountInput = ({
           <h3 className="text-sm font-medium text-gray-800">{label}</h3>
           <Badge
             variant="outline"
-            className="bg-blue-100 text-blue-800 border-blue-200"
+            className="bg-emerald-50 text-emerald-700 border-emerald-200"
           >
             Repay
           </Badge>
@@ -57,7 +57,7 @@ const AmountInput = ({
             Position Balance: {balance} ${token}
           </span>
           <button
-            className="text-xs p-1 text-blue-700 border border-blue-700 rounded-md hover:bg-blue-200"
+            className="text-xs p-1 text-emerald-700 border border-emerald-700 rounded-md hover:bg-emerald-100"
             onClick={() => onChange(borrowBalance)}
           >
             max
@@ -86,14 +86,14 @@ export const RepaySelectedToken = (props: any) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-gradient-to-r from-blue-500 to-indigo-400 hover:from-blue-600 hover:to-indigo-500 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 rounded-lg">
+        <Button className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 rounded-lg">
           <ArrowDown className="mr-2 h-4 w-4" /> Repay
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md bg-white border border-gray-200 shadow-xl rounded-xl">
         <DialogHeader className="pb-2 border-b border-gray-200">
           <div className="flex items-center gap-2">
-            <CreditCard className="h-6 w-6 text-blue-600" />
+            <CreditCard className="h-6 w-6 text-emerald-600" />
             <DialogTitle className="text-xl font-bold text-gray-900">
               Repay Loan
             </DialogTitle>
@@ -111,16 +111,16 @@ export const RepaySelectedToken = (props: any) => {
             debtValue={debtEquals()}
           />
 
-          <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
+          <div className="bg-emerald-50 p-3 rounded-lg border border-emerald-100">
             <div className="flex items-start">
-              <div className="bg-blue-100 p-1 rounded-full mr-2">
-                <CreditCard className="h-4 w-4 text-blue-600" />
+              <div className="bg-emerald-100 p-1 rounded-full mr-2">
+                <CreditCard className="h-4 w-4 text-emerald-600" />
               </div>
               <div>
-                <h4 className="text-xs font-medium text-blue-800 mb-1">
+                <h4 className="text-xs font-medium text-emerald-800 mb-1">
                   Debt Information
                 </h4>
-                <p className="text-xs text-blue-700">
+                <p className="text-xs text-emerald-700">
                   Debt: {props.borrowBalance} Shares
                   <br />
                   Equals to {(debtEquals().toFixed(4))} USDC
@@ -139,7 +139,7 @@ export const RepaySelectedToken = (props: any) => {
             className={`w-full h-12 text-base font-medium rounded-lg ${
               isPending
                 ? "bg-gray-200 text-gray-500"
-                : "bg-gradient-to-r from-blue-500 to-indigo-400 hover:from-blue-600 hover:to-indigo-500 text-white shadow-md hover:shadow-lg"
+                : "bg-emerald-500 hover:bg-emerald-600 text-white shadow-md hover:shadow-lg"
             }`}
           >
             {isPending ? (

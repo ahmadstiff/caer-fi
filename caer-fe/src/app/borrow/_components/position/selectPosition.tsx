@@ -57,7 +57,7 @@ const SelectPosition = ({
         value={positionAddress}
         onValueChange={(value) => setPositionAddress(value)}
       >
-        <SelectTrigger className="w-full bg-white text-gray-800 border border-gray-300 hover:border-gray-400 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm">
+        <SelectTrigger className="w-full bg-white text-gray-800 border border-gray-300 hover:border-gray-400 focus:ring-2 focus:ring-emerald-200 rounded-lg shadow-sm">
           <SelectValue placeholder="Select a position address" />
         </SelectTrigger>
         <SelectContent className="bg-white border border-gray-300 rounded-lg shadow-md">
@@ -76,7 +76,7 @@ const SelectPosition = ({
               if (positions.length > 0) {
                 return positions.map((position, index) => (
                   <SelectItem
-                    className="cursor-pointer px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 transition-colors"
+                    className="cursor-pointer px-3 py-2 text-sm text-gray-800 hover:bg-emerald-50 transition-colors"
                     key={index}
                     value={position.toString()}
                   >

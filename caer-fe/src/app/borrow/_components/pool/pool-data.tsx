@@ -44,21 +44,21 @@ const PoolData = () => {
   );
 
   return (
-    <div className="space-y-6 px-6">
+    <div className="space-y-6 px-6 py-4 bg-slate-50">
       {/* Collateral Section */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wider">
+          <h3 className="text-sm font-medium text-blue-700 uppercase tracking-wider">
             COLLATERAL
           </h3>
-          <div className="text-xs bg-gray-100 border border-gray-300 text-gray-800 px-2 py-0.5 rounded-full">
+          <div className="text-xs bg-blue-50 border border-blue-200 text-blue-700 px-2 py-0.5 rounded-full font-medium">
             Supplied
           </div>
         </div>
-        <div className="rounded-xl border border-gray-300 bg-white overflow-hidden p-4">
+        <div className="rounded-xl border border-blue-100 bg-white overflow-hidden p-5 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 rounded-full border border-blue-100 flex items-center justify-center overflow-hidden bg-blue-50">
                 <Image
                   src={
                     TOKEN_OPTIONS.find(
@@ -71,15 +71,15 @@ const PoolData = () => {
                 />
               </div>
               <div>
-                <div className="font-semibold text-gray-900">WETH</div>
-                <div className="text-xs text-gray-500">Collateral Asset</div>
+                <div className="font-semibold text-gray-800">WETH</div>
+                <div className="text-xs text-blue-500">Collateral Asset</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="font-semibold text-gray-900">
+              <div className="font-semibold text-gray-800">
                 {/* {formatValue(userCollateral)} */}
               </div>
-              <div className="text-xs text-gray-500">
+              <div className="text-xs text-blue-500">
                 {/* ≈ {formatUSD(userCollateral)} */}
               </div>
             </div>
@@ -94,17 +94,17 @@ const PoolData = () => {
       {/* Borrow Section */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wider">
+          <h3 className="text-sm font-medium text-emerald-700 uppercase tracking-wider">
             BORROW
           </h3>
-          <div className="text-xs bg-gray-100 border border-gray-300 text-gray-800 px-2 py-0.5 rounded-full">
+          <div className="text-xs bg-emerald-50 border border-emerald-200 text-emerald-700 px-2 py-0.5 rounded-full font-medium">
             Available
           </div>
         </div>
-        <div className="rounded-xl border border-gray-300 bg-white overflow-hidden p-4">
+        <div className="rounded-xl border border-emerald-100 bg-white overflow-hidden p-5 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 rounded-full border border-emerald-100 flex items-center justify-center overflow-hidden bg-emerald-50">
                 <Image
                   src={
                     TOKEN_OPTIONS.find(
@@ -117,15 +117,15 @@ const PoolData = () => {
                 />
               </div>
               <div>
-                <div className="font-semibold text-gray-900">USDC</div>
-                <div className="text-xs text-gray-500">Borrow Asset</div>
+                <div className="font-semibold text-gray-800">USDC</div>
+                <div className="text-xs text-emerald-500">Borrow Asset</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="font-semibold text-gray-900">
+              <div className="font-semibold text-gray-800">
                 {/* {formatValue(tokenBalanceByPosition, 6)} */}
               </div>
-              <div className="text-xs text-gray-500">
+              <div className="text-xs text-emerald-500">
                 {/* ≈ {formatUSD(tokenBalanceByPosition, 6)} */}
               </div>
             </div>

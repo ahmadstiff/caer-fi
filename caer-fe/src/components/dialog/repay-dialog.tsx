@@ -163,7 +163,7 @@ export const RepayDialog = () => {
                   Debt: {userBorrow ? Number(userBorrow) / 1e6 : "0.00"} Shares
                 </p>
                 <p className="text-xs text-blue-600 mt-3">
-                  Equals to {debtEquals().toFixed(4)} USDC
+                  Equals to {debtEquals() / 1e6} USDC
                 </p>
               </div>
             </div>

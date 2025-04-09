@@ -16,7 +16,6 @@ import ChainSelectorButton from "./chain-selector-button";
 import AmountInput from "./amount-input";
 import RecipientInput from "./recipient-input";
 import type { Chain } from "@/types/type";
-import { useAccount, useSignMessage } from "wagmi";
 import useTransactionHandler from "./transaction-handler";
 
 interface BorrowingDialogProps {
@@ -26,25 +25,22 @@ interface BorrowingDialogProps {
 export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [fromChain, setFromChain] = useState<Chain>({
+    id: 656476,
+    name: "Edu Chain",
+    type: "Testnet",
+    logoUrl: "/edu.png",
+  });
+  const [toChain, setToChain] = useState<Chain>({
     id: 42161,
     name: "Arbitrum",
     type: "Testnet",
     logoUrl: "/arbitrum-arb-logo.png",
   });
-  const [toChain, setToChain] = useState<Chain>({
-    id: 8453,
-    name: "Base",
-    type: "Testnet",
-    logoUrl: "/base-logo.png",
-  });
   const [amount, setAmount] = useState("");
   const [recipientAddress, setRecipientAddress] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { address } = useAccount();
-  const { signMessageAsync } = useSignMessage();
-
-  const { handleTransaction } = useTransactionHandler({
+  const { handleTransaction, TransactionProgress  } = useTransactionHandler({
     amount,
     token,
     fromChain,
@@ -91,10 +87,11 @@ export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
         <DialogFooter>
           <Button
             onClick={handleTransaction}
-            className="bg-gradient-to-r from-[#141beb] to-[#01ECBE] hover:from-[#01ECBE] hover:to-[#141beb] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg"
+            className="w-full bg-gradient-to-r from-[#141beb] to-[#01ECBE] hover:from-[#01ECBE] hover:to-[#141beb] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg"
             disabled={isLoading}
           >
             {isLoading ? "Processing..." : `Borrow ${token}`}
+            {TransactionProgress}
           </Button>
         </DialogFooter>
       </DialogContent>

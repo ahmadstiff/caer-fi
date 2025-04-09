@@ -19,10 +19,10 @@ export default function ChainSelector({
     selectorType === "from"
       ? [
           {
-            id: 421614,
-            name: "Arbitrum",
+            id: 656476,
+            name: "Edu Chain",
             type: "Testnet",
-            logoUrl: "/arbitrum-arb-logo.png",
+            logoUrl: "/edu.png",
           },
         ]
       : [
@@ -61,7 +61,7 @@ export default function ChainSelector({
             placeholder="Chain Name or ID"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 pr-4 py-2 w-full"
+            className="pl-10 pr-4 w-full"
           />
         </div>
       </CardHeader>
@@ -70,12 +70,12 @@ export default function ChainSelector({
           <div className="flex items-center">
             <span className="font-medium">Sort</span>
             <Button variant="ghost" className="ml-2 text-sm">
-              Routes From Arbitrum <ChevronDown className="h-4 w-4 ml-1" />
+              Routes From Edu Chain <ChevronDown className="h-4 w-4 ml-1" />
             </Button>
           </div>
           <div className="flex items-center">
             <span className="font-medium">Filter</span>
-            <Button variant="ghost" className="ml-2 text-sm flex items-center">
+            <Button variant="ghost" className="ml-2 text-sm flex justify-center items-center">
               None <X className="h-4 w-4 ml-1" />
             </Button>
           </div>
@@ -106,12 +106,12 @@ export default function ChainSelector({
               </div>
 
               <div className="text-right">
-                {chain.name === "Arbitrum" ? (
+                {chain.name === "Edu Chain" ? (
                   <p className="text-gray-600">0 route</p>
                 ) : (
                   <p className="text-gray-600">1 route</p>
                 )}
-                <p className="text-sm text-gray-500">Routes from Arbitrum</p>
+                <p className="text-sm text-gray-500">Routes from Edu Chain</p>
               </div>
             </button>
           ))}

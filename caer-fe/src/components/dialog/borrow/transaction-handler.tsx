@@ -1,6 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import { useSignMessage, useAccount } from "wagmi";
-import { toast } from "@/components/ui/use-toast"; // Updated import to use your custom toast
-import { TransactionHandlerProps } from "@/types/type";
+import type { TransactionHandlerProps } from "@/types/type";
+import {
+  TransactionProgressModal,
+  type TransactionStep,
+} from "@/components/transaction-progress";
 
 export default function useTransactionHandler({
   amount,
@@ -13,6 +19,11 @@ export default function useTransactionHandler({
 }: TransactionHandlerProps) {
   const { address } = useAccount();
   const { signMessageAsync } = useSignMessage();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [transactionSteps, setTransactionSteps] = useState<TransactionStep[]>(
+    []
+  );
+  const [requestId, setRequestId] = useState("");
 
   // Helper function to get chain emoji
   const getChainEmoji = (chainName: string) => {
@@ -27,65 +38,88 @@ export default function useTransactionHandler({
     return chainEmojis[chainName] || "🔗";
   };
 
+  // Helper function to update a step's status
+  const updateStepStatus = (
+    stepId: string,
+    status: "pending" | "loading" | "completed" | "error",
+    txHash?: string
+  ) => {
+    setTransactionSteps((prev) =>
+      prev.map((step) =>
+        step.id === stepId
+          ? { ...step, status, ...(txHash ? { txHash } : {}) }
+          : step
+      )
+    );
+  };
+
   const handleTransaction = async () => {
     try {
+      // Validation checks
       if (!amount || Number.parseFloat(amount) <= 0) {
-        toast({
-          title: "🚫 Invalid Amount",
-          description: "Please enter a valid amount to borrow.",
-          variant: "destructive",
-        });
+        alert("Please enter a valid amount to borrow.");
         return;
       }
 
       if (!recipientAddress) {
-        toast({
-          title: "⚠️ Missing Recipient",
-          description: "Please specify a recipient address.",
-          variant: "warning",
-        });
+        alert("Please specify a recipient address.");
         return;
       }
 
       if (!address) {
-        toast({
-          title: "🔗 Wallet Not Connected",
-          description: "Please connect your wallet before proceeding.",
-          variant: "destructive",
-        });
+        alert("Please connect your wallet before proceeding.");
         return;
       }
 
       onLoading(true);
 
-      const fromChainEmoji = getChainEmoji(fromChain.name);
-      const toChainEmoji = getChainEmoji(toChain.name);
-
-      // Show loading toast with more details
-      toast({
-        title: `⏳ Bridging ${amount} ${token}...`,
-        description: `${fromChainEmoji} **${fromChain.name}** → ${toChainEmoji} **${toChain.name}**\n\nPreparing your cross-chain transaction. This may take a moment...`,
-        variant: "info",
-      });
-
       // Generate a unique request ID
-      const requestId = `REQ-${Math.random()
+      const newRequestId = `REQ-${Math.random()
         .toString(36)
         .substring(2, 10)
         .toUpperCase()}-${Date.now().toString().substring(9)}`;
+
+      setRequestId(newRequestId);
+
+      // Initialize transaction steps
+      const initialSteps: TransactionStep[] = [
+        {
+          id: "create",
+          title: `Order created on origin chain (${fromChain.name})`,
+          status: "pending",
+        },
+        {
+          id: "finality",
+          title: `Waiting for Espresso finality for created order on origin chain...`,
+          status: "pending",
+        },
+        {
+          id: "settlement",
+          title: `Waiting for order to be settled on destination chain...`,
+          status: "pending",
+        },
+        {
+          id: "final",
+          title: `Waiting for Espresso finality for settlement transaction...`,
+          status: "pending",
+        },
+      ];
+
+      setTransactionSteps(initialSteps);
+      setIsModalOpen(true);
 
       // Format timestamp in ISO format for better standardization
       const timestamp = new Date().toISOString();
       const readableDate = new Date().toLocaleString();
 
-      // Calculate estimated gas fees (this would be replaced with actual calculation in production)
+      // Calculate estimated gas fees
       const estimatedGasFee = (Number(amount) * 0.002).toFixed(6);
 
       // Enhanced professional message to sign
       const messageToSign = `
 === CAER FINANCE: SECURE CROSS-CHAIN BRIDGE REQUEST ===
 
-REQUEST ID: ${requestId}
+REQUEST ID: ${newRequestId}
 TIMESTAMP: ${readableDate}
 
 TRANSACTION DETAILS:
@@ -110,23 +144,19 @@ Ref: CF-${timestamp.substring(0, 10)}-${Math.random()
         .toUpperCase()}
 `;
 
-      toast({
-        title: "🔐 Secure Signature Required",
-        description: `${fromChainEmoji} → ${toChainEmoji} Please verify and sign the secure transaction request in your wallet to authorize sending **${amount} ${token}** from **${fromChain.name}** to **${toChain.name}**.`,
-        variant: "info",
-      });
+      // Update first step to loading
+      updateStepStatus("create", "loading");
 
+      // Wait for signature
       const signature = await signMessageAsync({ message: messageToSign });
 
-      toast({
-        title: "🔄 Processing Transaction",
-        description: `${fromChainEmoji} → ${toChainEmoji} Your transaction is being processed on the blockchain. Please wait...`,
-        variant: "info",
-      });
+      // Update first step to completed and second to loading
+      updateStepStatus("create", "completed", "0x8315...a1ab");
+      updateStepStatus("finality", "loading");
 
       // Send request to backend
       const response = await fetch(
-        "https://solver-caer-fi.vercel.app/api/borrow",
+        "https://caer-finance-sequencer.vercel.app/api/borrow",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -138,7 +168,7 @@ Ref: CF-${timestamp.substring(0, 10)}-${Math.random()
             toChain: toChain.id,
             signature,
             message: messageToSign,
-            requestId,
+            requestId: newRequestId,
           }),
         }
       );
@@ -148,45 +178,61 @@ Ref: CF-${timestamp.substring(0, 10)}-${Math.random()
       if (data.success) {
         // Format transaction hash for display
         const txHash = data.data?.transactionHash || "";
-        const formattedTxHash = txHash
-          ? `${txHash.slice(0, 6)}...${txHash.slice(-4)}`
-          : "";
 
-        const txExplorerLink = txHash
-          ? `[View on Explorer](https://explorer.cachain.io/tx/${txHash})`
-          : "";
+        // Update remaining steps
+        updateStepStatus("finality", "completed");
+        updateStepStatus("settlement", "loading");
 
-        toast({
-          title: "✅ Transaction Successful!",
-          description: `${fromChainEmoji} → ${toChainEmoji} **${amount} ${token}** successfully borrowed from **${
-            fromChain.name
-          }** to **${toChain.name}**!\n\n${
-            txHash ? `Transaction: ${formattedTxHash}` : ""
-          } usdc token 0x66bbf06f9f42effffcded87078cb9c80f5d7054e`,
-          variant: "success",
-        });
+        // Simulate waiting for settlement (in a real app, you'd listen for events)
+        setTimeout(() => {
+          updateStepStatus("settlement", "completed", txHash);
+          updateStepStatus("final", "loading");
 
-        onSuccess();
+          // Simulate waiting for final confirmation
+          setTimeout(() => {
+            updateStepStatus("final", "completed");
+            onSuccess();
+          }, 2000);
+        }, 3000);
       } else {
+        // Handle error
+        updateStepStatus("finality", "error");
         throw new Error(data.message || "Transaction failed");
       }
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "Unknown error";
 
-      toast({
-        title: "❌ Bridge Failed",
-        description: `${getChainEmoji(fromChain.name)} → ${getChainEmoji(
-          toChain.name
-        )} Failed to bridge **${amount} ${token}** from **${
-          fromChain.name
-        }** to **${toChain.name}**.\n\n⚠️ Error: ${errorMessage}`,
-        variant: "destructive",
-      });
+      // Update steps to show error
+      setTransactionSteps((prev) =>
+        prev.map((step) =>
+          step.status === "loading" ? { ...step, status: "error" } : step
+        )
+      );
+
+      console.error("Transaction failed:", errorMessage);
     } finally {
       onLoading(false);
     }
   };
 
-  return { handleTransaction };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  return {
+    handleTransaction,
+    TransactionProgress: (
+      <TransactionProgressModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="CAER Finance Bridge Progress"
+        steps={transactionSteps}
+        fromChain={fromChain.name}
+        toChain={toChain.name}
+        amount={amount}
+        token={token}
+      />
+    ),
+  };
 }

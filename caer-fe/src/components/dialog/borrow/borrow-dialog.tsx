@@ -1,4 +1,3 @@
-// BorrowingDialog.tsx
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
@@ -18,10 +17,7 @@ import RecipientInput from "./recipient-input";
 import type { Chain } from "@/types/type";
 import useTransactionHandler from "./transaction-handler";
 import useOnChainTransactionHandler from "./onchain-transaction-handler";
-
-interface BorrowingDialogProps {
-  token?: string;
-}
+import { BorrowingDialogProps } from "@/types/type";
 
 export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,10 +38,8 @@ export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [txCompleted, setTxCompleted] = useState(false);
 
-  // Determine if this is an on-chain transaction (Edu Chain to Edu Chain)
   const isOnChainTransaction = fromChain.id === 656476 && toChain.id === 656476;
 
-  // Function to reset the form state
   const resetForm = useCallback(() => {
     setAmount("");
     setRecipientAddress("");
@@ -92,8 +86,6 @@ export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
   const handleTransaction = handler.handleTransaction;
   const TransactionProgress = handler.TransactionProgress;
 
-  // isProcessing might only exist on onChainHandler
-  // We need to check if the property exists and if it's a boolean
   const processingState = 'isProcessing' in handler &&
     typeof handler.isProcessing === 'boolean' ?
     handler.isProcessing : false;

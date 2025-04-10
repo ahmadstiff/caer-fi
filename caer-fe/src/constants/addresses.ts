@@ -17,3 +17,4 @@ export const position = "0x81aF69E69FdbF6a1dBede7CCc73eD2d72E179E9D" as Address;
 export const priceFeed = "0x4a363F2dE88567623Ff351584Eb9d8B71CD1fEb8" as Address; // 0x7C649479E519F41466BF783d988B6F25F61F4b06 (ARB) // 0x4a363F2dE88567623Ff351584Eb9d8B71CD1fEb8 (EDU)
 export const hxAddress = "https://opencampus-codex.blockscout.com/tx/" as Address;
 export const lendingPoolSequencer = "0x9F19f49DA9D24382892a78D8d966441DCc4ee89b" as Address; // 0xdE8eDfdA49a2ca5Fe693e4355a1d70D49018f3C4 (ARB) // 0x9F19f49DA9D24382892a78D8d966441DCc4ee89b (EDU)
+export const solverAddress= "0x44C444f33E25b382AD64C88f40E286966CeC0535" as Address;

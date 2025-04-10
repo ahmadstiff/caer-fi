@@ -67,9 +67,13 @@ interface TransactionHandlerProps {
   onSuccess: () => void;
   onLoading: (loading: boolean) => void;
 }
+interface BorrowingDialogProps {
+  token?: string;
+}
 export {
   SupplyDialogProps,
   AssetItem,
   TransactionHandlerProps,
   PositionTokenProps,
+  BorrowingDialogProps,
 };

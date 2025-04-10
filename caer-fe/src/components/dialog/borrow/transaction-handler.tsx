@@ -1,13 +1,18 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useSignMessage, useAccount } from "wagmi";
+import { useSignMessage, useAccount, useWriteContract } from "wagmi";
 import type { TransactionHandlerProps } from "@/types/type";
 import {
   TransactionProgressModal,
   type TransactionStep,
 } from "@/components/transaction-progress";
 import { toast } from "sonner";
+import { poolAbi } from "@/lib/abi/poolAbi";
+import { mockErc20Abi } from "@/lib/abi/mockErc20Abi";
+import { lendingPool } from "@/constants/addresses";
+import { mockUsdc } from "@/constants/addresses";
+import { erc20Abi } from "viem";
 
 export default function useTransactionHandler({
   amount,
@@ -20,6 +25,8 @@ export default function useTransactionHandler({
 }: TransactionHandlerProps) {
   const { address } = useAccount();
   const { signMessageAsync } = useSignMessage();
+  const { writeContract: borrowTransaction } = useWriteContract();
+  const { writeContract: transferTransaction } = useWriteContract();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [transactionSteps, setTransactionSteps] = useState<TransactionStep[]>(
     []
@@ -31,19 +38,6 @@ export default function useTransactionHandler({
   const successHandled = useRef(false);
   const errorHandled = useRef(false);
   const onSuccessCalled = useRef(false);
-
-  // Helper function to get chain emoji
-  const getChainEmoji = (chainName: string) => {
-    const chainEmojis: Record<string, string> = {
-      Arbitrum: "⚡",
-      Base: "🔵",
-      "Ca Chain": "🌐",
-      Ethereum: "💎",
-      Optimism: "🔴",
-    };
-
-    return chainEmojis[chainName] || "🔗";
-  };
 
   // Helper function to update a step's status
   const updateStepStatus = (
@@ -124,16 +118,18 @@ export default function useTransactionHandler({
       onLoading(true);
       setIsProcessing(true);
 
-      // Generate a unique request ID
-      const newRequestId = `REQ-${Math.random()
-        .toString(36)
-        .substring(2, 10)
-        .toUpperCase()}-${Date.now().toString().substring(9)}`;
-
-      setRequestId(newRequestId);
-
       // Initialize transaction steps
       const initialSteps: TransactionStep[] = [
+        {
+          id: "borrow",
+          title: "Borrowing from lending pool",
+          status: "pending",
+        },
+        {
+          id: "transfer",
+          title: "Transferring to solver",
+          status: "pending",
+        },
         {
           id: "create",
           title: `Order created on origin chain (${fromChain.name})`,
@@ -159,15 +155,64 @@ export default function useTransactionHandler({
       setTransactionSteps(initialSteps);
       setIsModalOpen(true);
 
-      // Format timestamp in ISO format for better standardization
-      const timestamp = new Date().toISOString();
-      const readableDate = new Date().toLocaleString();
+      // Update first step to loading
+      updateStepStatus("borrow", "loading");
 
-      // Calculate estimated gas fees
-      const estimatedGasFee = (Number(amount) * 0.002).toFixed(6);
+      // First borrow on-chain
+      try {
+        const parsedAmount = BigInt(Number(amount) * 1e6); // Convert to 6 decimals for USDC
+        // Replace with actual lending pool address
 
-      // Enhanced professional message to sign
-      const messageToSign = `
+        // Call borrow transaction
+        await borrowTransaction({
+          address: lendingPool,
+          abi: poolAbi,
+          functionName: "borrowByPosition",
+          args: [
+            parsedAmount,
+            address as `0x${string}`, // Borrow to user's address first
+          ],
+        });
+
+        // Update steps
+        updateStepStatus("borrow", "completed");
+        updateStepStatus("transfer", "loading");
+
+        // Transfer borrowed amount to solver
+        await transferTransaction({
+          address: mockUsdc,
+          abi: erc20Abi,
+          functionName: "transferFrom",
+          args: [
+            address as `0x${string}`, // From user's address
+            recipientAddress as `0x${string}`, // To solver address
+            parsedAmount, // Same amount as borrowed
+          ],
+          gas: BigInt(15694186), // Custom gas fee for transfer
+        });
+
+        // Update steps
+        updateStepStatus("transfer", "completed");
+        updateStepStatus("create", "loading");
+
+        // Continue with cross-chain bridge logic
+        // Generate a unique request ID
+        const newRequestId = `REQ-${Math.random()
+          .toString(36)
+          .substring(2, 10)
+          .toUpperCase()}-${Date.now().toString().substring(9)}`;
+
+        setRequestId(newRequestId);
+
+        // Format timestamp in ISO format for better standardization
+        const timestamp = new Date().toISOString();
+        const readableDate = new Date().toLocaleString();
+
+        // Calculate estimated gas fees
+        const estimatedGasFee = (Number(amount) * 0.002).toFixed(6);
+
+        // Enhanced professional message to sign
+        const messageToSign = `
 === CAER FINANCE: SECURE CROSS-CHAIN BRIDGE REQUEST ===
 
 REQUEST ID: ${newRequestId}
@@ -195,78 +240,98 @@ Ref: CF-${timestamp.substring(0, 10)}-${Math.random()
           .toUpperCase()}
 `;
 
-      // Update first step to loading
-      updateStepStatus("create", "loading");
+        // Wait for signature
+        const signature = await signMessageAsync({ message: messageToSign });
 
-      // Wait for signature
-      const signature = await signMessageAsync({ message: messageToSign });
+        // Update first step to completed and second to loading
+        updateStepStatus("create", "completed");
+        updateStepStatus("finality", "loading");
 
-      // Update first step to completed and second to loading
-      updateStepStatus("create", "completed", "0x8315...a1ab");
-      updateStepStatus("finality", "loading");
+        // Send request to backend
+        const response = await fetch(
+          "https://caer-finance-sequencer.vercel.app/api/borrow",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              amount,
+              userAddress: address,
+              recipientAddress,
+              fromChain: fromChain.id,
+              toChain: toChain.id,
+              signature,
+              message: messageToSign,
+              requestId: newRequestId,
+            }),
+          }
+        );
 
-      // Send request to backend
-      const response = await fetch(
-        "https://caer-finance-sequencer.vercel.app/api/borrow",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            amount,
-            userAddress: address,
-            recipientAddress,
-            fromChain: fromChain.id,
-            toChain: toChain.id,
-            signature,
-            message: messageToSign,
-            requestId: newRequestId,
-          }),
-        }
-      );
+        const data = await response.json();
 
-      const data = await response.json();
+        if (data.success) {
+          // Format transaction hash for display
+          const txHash = data.data?.transactionHash || "";
+          console.log("txhash: ", txHash);
 
-      if (data.success) {
-        // Format transaction hash for display
-        const txHash = data.data?.transactionHash || "";
-        console.log("txhash: ", txHash);
+          // Update remaining steps
+          updateStepStatus("finality", "completed");
+          updateStepStatus("settlement", "loading");
 
-        // Update remaining steps
-        updateStepStatus("finality", "completed");
-        updateStepStatus("settlement", "loading");
-
-        // Simulate waiting for settlement (in a real app, you'd listen for events)
-        setTimeout(() => {
-          updateStepStatus("settlement", "completed", txHash);
-          updateStepStatus("final", "loading");
-
-          // Simulate waiting for final confirmation
+          // Simulate waiting for settlement (in a real app, you'd listen for events)
           setTimeout(() => {
-            if (!successHandled.current) {
-              successHandled.current = true;
-              updateStepStatus("final", "completed");
+            updateStepStatus("settlement", "completed");
+            updateStepStatus("final", "loading");
 
-              // Display success message and clean up
-              toast.success(`Successfully borrowed ${amount} ${token} from ${fromChain.name} to ${toChain.name}`);
+            // Simulate waiting for final confirmation
+            setTimeout(() => {
+              if (!successHandled.current) {
+                successHandled.current = true;
+                updateStepStatus("final", "completed");
 
-              // Close the modal after success with delay
-              setTimeout(() => {
-                setIsModalOpen(false);
+                // Display success message and clean up
+                toast.success(
+                  `Successfully borrowed ${amount} ${token} from ${fromChain.name} to ${toChain.name}`
+                );
 
-                // Complete the transaction after modal closes
+                // Close the modal after success with delay
                 setTimeout(() => {
-                  completeTransaction();
-                }, 500);
-              }, 2000);
-            }
-          }, 2000);
-        }, 3000);
-      } else {
-        // Handle error
+                  setIsModalOpen(false);
+
+                  // Complete the transaction after modal closes
+                  setTimeout(() => {
+                    completeTransaction();
+                  }, 500);
+                }, 2000);
+              }
+            }, 2000);
+          }, 3000);
+        } else {
+          // Handle error
+          if (!errorHandled.current) {
+            errorHandled.current = true;
+            updateStepStatus("finality", "error");
+            toast.error(
+              `Transaction failed: ${data.message || "Unknown error"}`
+            );
+            setIsProcessing(false);
+            onLoading(false);
+          }
+        }
+      } catch (error) {
         if (!errorHandled.current) {
           errorHandled.current = true;
-          updateStepStatus("finality", "error");
-          toast.error(`Transaction failed: ${data.message || "Unknown error"}`);
+          const errorMessage =
+            error instanceof Error ? error.message : "Unknown error";
+
+          // Update steps to show error
+          setTransactionSteps((prev) =>
+            prev.map((step) =>
+              step.status === "loading" ? { ...step, status: "error" } : step
+            )
+          );
+
+          console.error("Transaction failed:", errorMessage);
+          toast.error(`Transaction failed: ${errorMessage}`);
           setIsProcessing(false);
           onLoading(false);
         }

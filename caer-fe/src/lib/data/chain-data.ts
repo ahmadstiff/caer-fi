@@ -19,6 +19,12 @@ export const caChain = defineChain({
   rpcUrls: {
     default: { http: ["https://rpc.open-campus-codex.gelato.digital"] },
   },
+  blockExplorers: {
+    default: { 
+      name: "Blockscout",
+      url: "https://edu-chain-testnet.blockscout.com"
+    }
+  },
   testnet: true,
   iconBackground: "#ffff",
   iconUrl: "/edu.png"

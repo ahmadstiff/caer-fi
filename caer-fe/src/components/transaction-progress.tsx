@@ -1,5 +1,5 @@
 "use client";
-import { X, CheckCircle, Loader2 } from "lucide-react";
+import { CheckCircle, Loader2 } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { fetchTransactionData } from "@/lib/data/fetch-transaction-data";

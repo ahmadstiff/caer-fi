@@ -1,9 +1,9 @@
 # Caér Finance
 
 ## Project Demo
-![Project Screenshot](https://github.com/ahmadstiff/caer-fi/blob/main/caer-fe/public/caer-fi-home.png)
+[Go to site](https://caer-finance.vercel.app/)
 
-[Go to site]()
+![Project Screenshot](https://github.com/ahmadstiff/caer-fi/blob/main/caer-fe/public/caer-fi-home.png)
 
 ---
 

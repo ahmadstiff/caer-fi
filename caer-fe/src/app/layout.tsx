@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-import React, { useState } from "react";
->>>>>>> fc19c6b22f1e99912affd7d76b7bf935a8165a4f
 import { Geist, Azeret_Mono as Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
@@ -24,11 +20,9 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/caer.png", type: "image/png" },
-      { url: "/favicon.ico", type: "image/x-icon" }
+      { url: "/favicon.ico", type: "image/x-icon" },
     ],
-    apple: [
-      { url: "/caer.png", type: "image/png" }
-    ],
+    apple: [{ url: "/caer.png", type: "image/png" }],
   },
 };
 

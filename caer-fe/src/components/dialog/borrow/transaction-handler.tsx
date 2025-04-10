@@ -9,7 +9,6 @@ import {
 } from "@/components/transaction-progress";
 import { toast } from "sonner";
 import { poolAbi } from "@/lib/abi/poolAbi";
-import { mockErc20Abi } from "@/lib/abi/mockErc20Abi";
 import { lendingPool } from "@/constants/addresses";
 import { mockUsdc } from "@/constants/addresses";
 import { erc20Abi } from "viem";
@@ -120,16 +119,6 @@ export default function useTransactionHandler({
 
       // Initialize transaction steps
       const initialSteps: TransactionStep[] = [
-        {
-          id: "borrow",
-          title: "Borrowing from lending pool",
-          status: "pending",
-        },
-        {
-          id: "transfer",
-          title: "Transferring to solver",
-          status: "pending",
-        },
         {
           id: "create",
           title: `Order created on origin chain (${fromChain.name})`,

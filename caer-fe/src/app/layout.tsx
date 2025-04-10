@@ -1,17 +1,6 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-=======
->>>>>>> 344cd5079b0616d10bd2657adf01bbbab9a46538
 import { Geist, Azeret_Mono as Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
-import { lightTheme, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { WagmiProvider } from "wagmi";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { config } from "@/lib/wagmi";
-import Navbar from "@/components/navbar";
-import { Toaster } from "sonner";
-import Providers from "./Providers";
 import { Metadata } from "next";
 import ClientProviders from "@/components/providers/client-providers";
 
@@ -24,6 +13,10 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
 
 export const metadata: Metadata = {
   title: "Caer Finance",
@@ -38,8 +31,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body

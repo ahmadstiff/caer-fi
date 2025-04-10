@@ -10,7 +10,7 @@ import { config } from "@/lib/wagmi";
 import Navbar from "@/components/navbar";
 import { Toaster } from "sonner";
 import Providers from "./Providers";
-import Head from "next/head";
+import { Metadata } from "next";
 
 // Initialize fonts
 const geistSans = Geist({
@@ -28,15 +28,25 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
+export const metadata: Metadata = {
+  title: "Caer Finance",
+  description: "Cross-chain borrowing platform",
+  icons: {
+    icon: [
+      { url: "/caer.png", type: "image/png" },
+      { url: "/favicon.ico", type: "image/x-icon" }
+    ],
+    apple: [
+      { url: "/caer.png", type: "image/png" }
+    ],
+  },
+};
+
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   const [queryClient] = useState(() => new QueryClient());
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/caer.png" />
-        <title>CAER Finance</title>
-      </head>
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased min-h-screen bg-[#bdcde4] dark:bg-[#bdcde4]`}

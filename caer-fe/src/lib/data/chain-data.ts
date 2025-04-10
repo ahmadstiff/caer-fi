@@ -1,21 +1,9 @@
 import { defineChain } from "viem";
 
-// export const caChain = defineChain({
-//   id: 62851553,
-//   name: "Ca Chain",
-//   nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
-//   rpcUrls: {
-//     default: { http: ["http://44.213.128.45:8547/"] },
-//   },
-//   testnet: true,
-//   iconBackground: "#ffff",
-//   iconUrl: "/caer.png"
-// });
-
-export const caChain = defineChain({
+export const eduChain = defineChain({
   id: 656476,
-  name: "EDU CHAIN",
-  nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
+  name: "Edu Chain",
+  nativeCurrency: { name: "EDU", symbol: "EDU", decimals: 18 },
   rpcUrls: {
     default: { http: ["https://rpc.open-campus-codex.gelato.digital"] },
   },

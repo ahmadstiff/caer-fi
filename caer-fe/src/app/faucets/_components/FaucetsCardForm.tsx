@@ -16,6 +16,7 @@ import { toast } from "sonner";
 
 import { mockErc20Abi } from "@/lib/abi/mockErc20Abi";
 import { useAccount, useWriteContract } from "wagmi";
+import { AnimatePresence, motion } from "framer-motion";
 const FaucetsCardForm = () => {
   const { address } = useAccount();
   const [selectedToken, setSelectedToken] = useState<string>("");
@@ -61,15 +62,26 @@ const FaucetsCardForm = () => {
           <SelectContent className="bg-white border-[#01ECBE]/30">
             <SelectGroup>
               <SelectLabel className="text-[#07094d]">Tokens</SelectLabel>
-              {TOKEN_OPTIONS.map((token, index) => (
-                <SelectItem
-                  className="transition-colors duration-100 cursor-pointer text-[#07094d]"
-                  key={index}
-                  value={token.address}
-                >
-                  {token.name}
-                </SelectItem>
-              ))}
+              <AnimatePresence>
+                {TOKEN_OPTIONS.filter((token) => token.name !== "USDT").map(
+                  (token, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2, delay: index * 0.1 }}
+                    >
+                      <SelectItem
+                        className="transition-colors duration-100 cursor-pointer text-[#07094d] hover:bg-[#01ECBE]/10"
+                        value={token.address}
+                      >
+                        {token.name}
+                      </SelectItem>
+                    </motion.div>
+                  )
+                )}
+              </AnimatePresence>
             </SelectGroup>
           </SelectContent>
         </Select>

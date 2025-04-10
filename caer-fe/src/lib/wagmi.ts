@@ -1,15 +1,15 @@
 import { http } from "wagmi";
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
 import { arbitrumSepolia } from "viem/chains";
-import { caChain } from "./data/chain-data";
+import { eduChain } from "./data/chain-data";
 
 
 export const config = getDefaultConfig({
   appName: "MyDApp",
   projectId: "YOUR_PROJECT_ID",
-  chains: [caChain, arbitrumSepolia],
+  chains: [eduChain, arbitrumSepolia],
   transports: {
-    [caChain.id]: http(),
+    [eduChain.id]: http(),
     [arbitrumSepolia.id]: http(),
   },
 });

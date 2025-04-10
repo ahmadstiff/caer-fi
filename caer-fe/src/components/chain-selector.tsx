@@ -38,18 +38,6 @@ export default function ChainSelector({
             type: "Testnet",
             logoUrl: "/arbitrum-arb-logo.png",
           },
-          {
-            id: 62851553,
-            name: "Ca Chain",
-            type: "Testnet",
-            logoUrl: "/caer.png",
-          },
-          {
-            id: 8453,
-            name: "Base",
-            type: "Testnet",
-            logoUrl: "/base-logo.png",
-          },
         ];
 
   const filteredChains = availableChains.filter(

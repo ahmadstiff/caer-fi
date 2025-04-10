@@ -15,7 +15,7 @@ export default function AmountInput({
   onChange,
 }: AmountInputProps) {
   const handleMaxAmount = () => {
-    onChange("0.0000"); // Simulasi nilai maksimum
+    onChange("10"); // Simulasi nilai maksimum
   };
 
   return (
@@ -29,7 +29,7 @@ export default function AmountInput({
           <span className="font-medium">{token}</span>
           <img
             src="/usdc.png"
-            alt="Arbitrum Logo"
+            alt="usdc"
             className="w-6 h-6"
           />
         </div>

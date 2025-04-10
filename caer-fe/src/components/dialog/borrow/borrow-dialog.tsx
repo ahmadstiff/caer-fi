@@ -10,7 +10,7 @@ import {
   DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { CreditCard } from "lucide-react";
+import { CreditCard, Copy } from "lucide-react";
 import ChainSelectorButton from "./chain-selector-button";
 import AmountInput from "./amount-input";
 import RecipientInput from "./recipient-input";
@@ -18,6 +18,7 @@ import type { Chain } from "@/types/type";
 import useTransactionHandler from "./transaction-handler";
 import useOnChainTransactionHandler from "./onchain-transaction-handler";
 import { BorrowingDialogProps } from "@/types/type";
+import { toast } from "sonner";
 
 export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,10 +29,10 @@ export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
     logoUrl: "/edu.png",
   });
   const [toChain, setToChain] = useState<Chain>({
-    id: 42161,
-    name: "Arbitrum",
+    id: 656476,
+    name: "Edu Chain",
     type: "Testnet",
-    logoUrl: "/arbitrum-arb-logo.png",
+    logoUrl: "/edu.png",
   });
   const [amount, setAmount] = useState("");
   const [recipientAddress, setRecipientAddress] = useState("");
@@ -86,22 +87,26 @@ export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
   const handleTransaction = handler.handleTransaction;
   const TransactionProgress = handler.TransactionProgress;
 
-  const processingState = 'isProcessing' in handler &&
-    typeof handler.isProcessing === 'boolean' ?
-    handler.isProcessing : false;
+  const processingState =
+    "isProcessing" in handler && typeof handler.isProcessing === "boolean"
+      ? handler.isProcessing
+      : false;
 
   // Handle dialog closing with proper access to current state
-  const handleDialogChange = useCallback((open: boolean) => {
-    // Only allow closing when not processing
-    if ((isLoading || processingState) && !open) {
-      console.log("Preventing dialog close during processing");
-      return;
-    }
+  const handleDialogChange = useCallback(
+    (open: boolean) => {
+      // Only allow closing when not processing
+      if ((isLoading || processingState) && !open) {
+        console.log("Preventing dialog close during processing");
+        return;
+      }
 
-    // Allow dialog to close and reset state
-    console.log("Dialog change:", open);
-    setIsOpen(open);
-  }, [isLoading, processingState]);
+      // Allow dialog to close and reset state
+      console.log("Dialog change:", open);
+      setIsOpen(open);
+    },
+    [isLoading, processingState]
+  );
 
   // Effect to handle dialog open/close
   useEffect(() => {
@@ -137,7 +142,8 @@ export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
           <div className="flex items-center gap-2">
             <CreditCard className="h-6 w-6 text-blue-500" />
             <DialogTitle className="text-xl font-bold text-slate-800">
-              {isOnChainTransaction ? "On-Chain Borrow" : "Cross-Chain Borrow"} {token}
+              {isOnChainTransaction ? "On-Chain Borrow" : "Cross-Chain Borrow"}{" "}
+              {token}
             </DialogTitle>
           </div>
         </DialogHeader>
@@ -153,16 +159,36 @@ export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
 
           {/* Only show recipient input for cross-chain transactions */}
           {!isOnChainTransaction && (
-            <RecipientInput
-              value={recipientAddress}
-              onChange={setRecipientAddress}
-            />
+            <>
+              <RecipientInput
+                value={recipientAddress}
+                onChange={setRecipientAddress}
+              />
+              <div className="p-3 bg-blue-50 rounded-lg">
+                <>
+                  <span className="text-sm text-blue-600">
+                    <strong>Important: </strong>For cross-chain borrowing,
+                    please use this gas limit:{" "}
+                  </span>
+                  <span
+                    className="cursor-pointer text-sm text-blue-700 text-bold hover:text-blue-800"
+                    onClick={() => {
+                      navigator.clipboard.writeText("15694186");
+                      toast.success("Gas limit copied to clipboard!");
+                    }}
+                  >
+                    15694186 <Copy className="inline-block w-3 h-3 ml-1" />
+                  </span>
+                </>
+              </div>
+            </>
           )}
 
           {isOnChainTransaction && (
             <div className="p-3 bg-blue-50 rounded-lg">
               <p className="text-sm text-blue-600">
-                <strong>On-chain Transaction:</strong> Borrowing directly on Edu Chain using your position.
+                <strong>On-chain Transaction:</strong> Borrowing directly on Edu
+                Chain using your position.
               </p>
             </div>
           )}
@@ -182,7 +208,11 @@ export default function BorrowDialog({ token = "USDC" }: BorrowingDialogProps) {
             className="w-full bg-gradient-to-r from-[#141beb] to-[#01ECBE] hover:from-[#01ECBE] hover:to-[#141beb] text-white font-medium shadow-md hover:shadow-lg transition-colors duration-300 rounded-lg cursor-pointer"
             disabled={isLoading || processingState || txCompleted || !amount}
           >
-            {isLoading || processingState ? "Processing..." : txCompleted ? "Completed" : `Borrow ${token}`}
+            {isLoading || processingState
+              ? "Processing..."
+              : txCompleted
+              ? "Completed"
+              : `Borrow ${token}`}
             {TransactionProgress}
           </Button>
         </DialogFooter>

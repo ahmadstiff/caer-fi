@@ -70,10 +70,18 @@ interface TransactionHandlerProps {
 interface BorrowingDialogProps {
   token?: string;
 }
+ interface TokenOption {
+  name: string;
+  namePrice: string;
+  address: string;
+  logo: string;
+  decimals: number;
+}
 export {
   SupplyDialogProps,
   AssetItem,
   TransactionHandlerProps,
   PositionTokenProps,
   BorrowingDialogProps,
+  TokenOption,
 };

@@ -63,7 +63,7 @@ const AmountInput = ({
           </button>
         </div>
         <span className="text-xs text-gray-700">
-          Amount: {(value / price).toFixed(5)} {token}
+          Amount: {((Number(value))).toFixed(5)} {token}
         </span>
       </CardContent>
     </Card>
@@ -71,6 +71,7 @@ const AmountInput = ({
 };
 
 export const RepaySelectedToken = (props: any) => {
+  console.log("props", props)
   const {
     valueAmount,
     setValueAmount,
@@ -80,7 +81,10 @@ export const RepaySelectedToken = (props: any) => {
     debtEquals,
     handleApproveAndRepay,
     isPending,
-  } = useRepayLoan(props);
+  } = useRepayLoan({
+    tokenAddress: props.address,
+    arrayLocation: props.arrayLocation,
+  });
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>

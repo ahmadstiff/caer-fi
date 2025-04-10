@@ -1,7 +1,9 @@
 # Caér Finance
 
 ## Project Demo
-📷 ![Project Screenshot]()
+![Project Screenshot](https://github.com/ahmadstiff/caer-fi/blob/main/caer-fe/public/caer-fi-home.png)
+
+[Go to site]()
 
 ---
 
@@ -184,6 +186,18 @@ Upon withdrawal, the provider receives their **proportional share of the pool’
 > **Note:**  
 > For the purposes of this hackathon, we are using **mock tokens** to simulate transactions and interactions within the platform.  
 > Additionally, the platform is operating on a **testnet environment**.
+
+
+---
+
+## 🔗 Links
+
+- 🌐 Website: []()
+- 📚 Documentation: []()
+- 🏢 Organization: []()
+- 🎥 Video Demo Application: []()
+- 🧑‍🏫 CAÉR Presentation: []()
+- 🖥️ Presentation Slides: [Canva Slides]()
 
 ---
 

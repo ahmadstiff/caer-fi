@@ -1,9 +1,16 @@
-import {  mockUsdc, mockWbtc, mockWeth } from "./addresses";
+import { mockUsdc, mockWbtc, mockWeth } from "./addresses";
 import usdc from "../../public/usdc.png";
 import weth from "../../public/weth.png";
 import wbtc from "../../public/wbtc.png";
 import usdt from "../../public/usdt.png";
-import { TokenOption } from "@/types/type";
+
+export interface TokenOption {
+  name: string;
+  namePrice: string;
+  address: string;
+  logo: string;
+  decimals: number;
+}
 
 export const TOKEN_OPTIONS: TokenOption[] = [
   {

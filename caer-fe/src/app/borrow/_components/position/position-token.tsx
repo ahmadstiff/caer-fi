@@ -13,6 +13,7 @@ interface PositionTokenProps {
   address: Address;
   decimal: number;
   addressPosition: Address | undefined;
+  arrayLocation: bigint;
 }
 
 const PositionToken = ({
@@ -20,6 +21,7 @@ const PositionToken = ({
   address,
   decimal,
   addressPosition,
+  arrayLocation,
 }: PositionTokenProps) => {
   const { userCollateral, collateralAddress } = useReadLendingData();
 
@@ -72,6 +74,7 @@ const PositionToken = ({
             balance={tokenBalance}
             address={address}
             decimal={getDecimal(address)}
+            arrayLocation={arrayLocation}
           />
         </div>
       </div>

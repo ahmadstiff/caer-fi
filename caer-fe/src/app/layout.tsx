@@ -1,10 +1,17 @@
+import React, { useState } from "react";
 import { Geist, Azeret_Mono as Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
+import { lightTheme, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { WagmiProvider } from "wagmi";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { config } from "@/lib/wagmi";
+import Navbar from "@/components/navbar";
+import { Toaster } from "sonner";
+import Providers from "./Providers";
 import { Metadata } from "next";
 import ClientProviders from "@/components/providers/client-providers";
 
-// Initialize fonts
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -14,11 +21,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-// Define layout props type
-interface RootLayoutProps {
-  children: React.ReactNode;
-}
 
 export const metadata: Metadata = {
   title: "Caer Finance",
@@ -35,6 +37,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body

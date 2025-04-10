@@ -2,7 +2,7 @@ import { defineChain } from "viem";
 
 export const eduChain = defineChain({
   id: 656476,
-  name: "Edu Chain",
+  name: "EDU Chain",
   nativeCurrency: { name: "EDU", symbol: "EDU", decimals: 18 },
   rpcUrls: {
     default: { http: ["https://rpc.open-campus-codex.gelato.digital"] },

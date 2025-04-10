@@ -192,9 +192,9 @@ Upon withdrawal, the provider receives their **proportional share of the pool’
 
 ## 🔗 Links
 
-- 🌐 Website: []()
-- 📚 Documentation: []()
-- 🏢 Organization: []()
+- 🌐 Website: [https://caer-finance.vercel.app](https://caer-finance.vercel.app/)
+- 📚 Documentation: [https://caer-finance.gitbook.io/caer-finance](https://caer-finance.gitbook.io/caer-finance)
+- 🏢 Organization: [https://github.com/ahmadstiff/caer-fi](https://github.com/ahmadstiff/caer-fi)
 - 🎥 Video Demo Application: []()
 - 🧑‍🏫 CAÉR Presentation: []()
 - 🖥️ Presentation Slides: [Canva Slides]()

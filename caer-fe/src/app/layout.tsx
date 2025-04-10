@@ -21,13 +21,7 @@ interface RootLayoutProps {
 export const metadata: Metadata = {
   title: "Caer Finance",
   description: "Cross-chain borrowing platform",
-  icons: {
-    icon: [
-      { url: "/caer.png", type: "image/png" },
-      { url: "/caer.ico", type: "image/x-icon" },
-    ],
-    apple: [{ url: "/caer.png", type: "image/png" }],
-  },
+  icons: { icon: "/caer.png" },
 };
 
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {

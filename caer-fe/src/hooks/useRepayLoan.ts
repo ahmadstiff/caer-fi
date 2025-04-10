@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useWriteContract, useReadContract, useAccount } from "wagmi";
 import { useBorrowBalance } from "./useBorrowBalance";
 import { poolAbi } from "@/lib/abi/poolAbi";
@@ -9,9 +9,10 @@ import { useReadLendingData } from "./read/useReadLendingData";
 
 interface UseRepayLoanProps {
   tokenAddress: `0x${string}`;
+  arrayLocation: bigint;
 }
 
-export const useRepayLoan = ({ tokenAddress }: UseRepayLoanProps) => {
+export const useRepayLoan = ({ tokenAddress, arrayLocation }: UseRepayLoanProps) => {
   const [valueAmount, setValueAmount] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const borrowBalance = useBorrowBalance();
@@ -52,22 +53,22 @@ export const useRepayLoan = ({ tokenAddress }: UseRepayLoanProps) => {
       return;
     }
 
+    console.log("valueAmount", valueAmount)
+    console.log("arrayLocation", arrayLocation)
+    console.log("tokenAddress", tokenAddress)
+
     const amount = BigInt(Math.round(Number(valueAmount) * 1e6)); // Convert to USDC precision
-    const approvalAmount = amount * BigInt(2); // Approving twice to ensure full coverage
+    const approvalAmount = amount + amount; // Approving twice to ensure full coverage
+
+    console.log("amount", amount)
+    console.log("approvalAmount", approvalAmount)
 
     try {
-      await writeContract({
-        address: mockUsdc,
-        abi: mockErc20Abi,
-        functionName: "approve",
-        args: [lendingPool, approvalAmount],
-      });
-
       await writeContract({
         address: lendingPool,
         abi: poolAbi,
         functionName: "repayWithSelectedToken",
-        args: [amount, address],
+        args: [amount, tokenAddress, arrayLocation],
       });
 
       setValueAmount("");

@@ -34,11 +34,13 @@ const PositionCard = () => {
     undefined
   );
   const [positionLength, setPositionLength] = useState<number>(0);
-const [positionsArray, setPositionsArray] = useState<`0x${string}`[]>([]);
+  const [positionsArray, setPositionsArray] = useState<`0x${string}`[]>([]);
   const { collateralAddress, borrowAddress, userCollateral } =
     useReadLendingData();
 
   const userBorrowShares = useBorrowBalance();
+
+  const arrayLocation = positionsArray.indexOf(positionAddress as `0x${string}`);
 
   const findNameToken = (address: Address | unknown) => {
     const token = TOKEN_OPTIONS.find((asset) => asset.address === address);
@@ -202,6 +204,7 @@ const [positionsArray, setPositionsArray] = useState<`0x${string}`[]>([]);
                           address={mockWeth}
                           decimal={1e18}
                           addressPosition={positionAddress as `0x${string}`}
+                          arrayLocation={BigInt(arrayLocation)}
                         />
                         {/* WBTC */}
                         <PositionToken
@@ -209,6 +212,7 @@ const [positionsArray, setPositionsArray] = useState<`0x${string}`[]>([]);
                           address={mockWbtc}
                           decimal={1e8}
                           addressPosition={positionAddress as `0x${string}`}
+                          arrayLocation={BigInt(arrayLocation)}
                         />
                         {/* USDC */}
                         <PositionToken
@@ -216,6 +220,7 @@ const [positionsArray, setPositionsArray] = useState<`0x${string}`[]>([]);
                           address={mockUsdc}
                           decimal={1e6}
                           addressPosition={positionAddress as `0x${string}`}
+                          arrayLocation={BigInt(arrayLocation)}
                         />
                       </div>
                     </div>

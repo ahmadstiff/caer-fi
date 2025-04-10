@@ -38,11 +38,11 @@ export default function Home() {
 
         <TypewriterEffectSmooth words={words} className=" mx-auto text-center " />
 
-        <div className="flex flex-row items-center gap-4 md:gap-6 mt-6 md:mt-10 text-center z-30">
+        <div className="flex flex-row items-center gap-4 md:gap-6 xl:gap-12 mt-6 md:mt-10 text-center z-30">
           <Button
             variant="outline"
             size="lg"
-            className="bg-[#141beb] hover:bg-[#07F2BE] text-white px-8 py-6 text-md rounded-md cursor-pointer"
+            className="bg-[#141beb] hover:bg-[#074af2] text-white hover:text-white px-6 py-6 text-md rounded-xl cursor-pointer"
             asChild
           >
             <a href="/lending">Start Lending</a>
@@ -51,7 +51,7 @@ export default function Home() {
           <Button
             variant="outline"
             size="lg"
-            className="border-[#01ECBE] bg-[#ffffff2e] text-[#07094d] hover:bg-[#01ECBE]/10 px-8 py-6 text-lg rounded-md cursor-pointer"
+            className="border-[#01ECBE] bg-[#ffffff2e] text-[#07094d] hover:bg-[#01ECBE]/10 px-6 py-6 text-md rounded-xl cursor-pointer"
             asChild
           >
             <a href="https://caer-finance.gitbook.io/caer-finance/" target="_blank" rel="noopener noreferrer">View Docs</a>

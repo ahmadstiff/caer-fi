@@ -1,9 +1,9 @@
 # Caér Finance
 
 ## Project Demo
-![Project Screenshot](https://github.com/ahmadstiff/caer-fi/blob/main/caer-fe/public/caer-fi-home.png)
+[Go to site](https://caer-finance.vercel.app/)
 
-[Go to site]()
+![Project Screenshot](https://github.com/ahmadstiff/caer-fi/blob/main/caer-fe/public/caer-fi-home.png)
 
 ---
 
@@ -192,14 +192,39 @@ Upon withdrawal, the provider receives their **proportional share of the pool’
 
 ## 🔗 Links
 
-- 🌐 Website: []()
-- 📚 Documentation: []()
-- 🏢 Organization: []()
+- 🌐 Website: [https://caer-finance.vercel.app](https://caer-finance.vercel.app/)
+- 📚 Documentation: [https://caer-finance.gitbook.io/caer-finance](https://caer-finance.gitbook.io/caer-finance)
+- 🏢 Organization: [https://github.com/ahmadstiff/caer-fi](https://github.com/ahmadstiff/caer-fi)
 - 🎥 Video Demo Application: []()
 - 🧑‍🏫 CAÉR Presentation: []()
 - 🖥️ Presentation Slides: [Canva Slides]()
 
 ---
+## 🔗 Smart Contracts 
+### LendingPool ‼Deployed on Edu Chain
+- **Contract Name:** LendingPool
+- **Contract Address:** 0xF64b9a1bbD331eB5e3Fa5c80fe9417E1A3F96F12
+
+### LendingPoolSequencer ‼Deployed on Arbitrum Sepolia
+- **Contract Name:** LendingPoolSequencer
+- **Contract Address:** 0xdE8eDfdA49a2ca5Fe693e4355a1d70D49018f3C4
+
+### MockUSDC ‼Import Token Contract Address to Your Wallet
+- **Contract Name:** MockUSDC
+- **Contract Address:** 0x42260072BbfaD1b50AD01C8aAdeA5dE345f2E752
+
+## 🔗 API
+- **Sequencer:** https://caer-finance-sequencer.vercel.app/
+
+## Edu Chain Testnet
+- **RPC URL:** https://rpc.open-campus-codex.gelato.digital
+- **Chain ID:** 656476
+- **Blockexplorer:** https://opencampus-codex.blockscout.com/
+  
+## Arbitrum Sepolia
+- **RPC URL:** https://sepolia-rollup.arbitrum.io/rpc
+- **Chain ID:** 421614
+- **Blockexplorer:** https://sepolia.arbiscan.io/
 
 ## License
 

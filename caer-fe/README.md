@@ -27,7 +27,7 @@
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/ghozzza/caer-fi
+git clone https://github.com/ahmadstiff/caer-fi
 cd caer-fi
 cd caer-fe
 ```
